@@ -1,23 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-        <Nullable>enable</Nullable>
-        <LangVersion>latest</LangVersion>
-        <RootNamespace />
-
-        <!--Assembly attributes-->
-        <Version>1.9.0</Version>
-        <Description>The framework that allows you to design high-quality architecture of your game project.</Description>
-        <Authors>Denis535</Authors>
-        <Company>Denis535</Company>
-        <Product>$(AssemblyName)</Product>
-        <Copyright></Copyright>
-        <RepositoryUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/GameFramework.Pro</RepositoryUrl>
-
-        <!--Package attributes-->
         <IsPackable>true</IsPackable>
-        <Title>$(AssemblyName)</Title>
         <PackageId>$(AssemblyName)</PackageId>
         <PackageVersion>$(Version)</PackageVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -25,16 +9,13 @@
         <PackageIconUrl></PackageIconUrl>
         <PackageDescription>$(Description)</PackageDescription>
         <PackageProjectUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/GameFramework.Pro</PackageProjectUrl>
-        <PackageTags>gamedev architecture game-architecture framework game-framework architecture-framework best-practices</PackageTags>
-
+        <PackageTags>gamedev framework architecture game-framework game-architecture best-practices</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageLicenseUrl></PackageLicenseUrl>
         <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
-
         <IsTool>false</IsTool>
         <DevelopmentDependency>false</DevelopmentDependency>
 
-        <!--Pack options-->
         <PackRelease>true</PackRelease>
 
         <EnableDefaultItems>true</EnableDefaultItems>
@@ -44,27 +25,28 @@
 
         <IncludeBuildOutput>true</IncludeBuildOutput>
         <IncludeContentInPack>true</IncludeContentInPack>
-        <IncludeSymbols>false</IncludeSymbols>
-        <IncludeSource>false</IncludeSource>
+        <IncludeSymbols>true</IncludeSymbols>
+        <IncludeSource>true</IncludeSource>
 
         <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeBuilds</TargetsForTfmSpecificBuildOutput>
         <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeContent</TargetsForTfmSpecificContentInPackage>
     </PropertyGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="GameFramework.Pro.Tests" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="FluentSyntax.Pro" Version="1.0.1" />
-        <PackageReference Include="Option.Pro" Version="1.1.1" />
-        <PackageReference Include="StateMachine.Pro" Version="5.3.4" />
-        <PackageReference Include="TreeMachine.Pro" Version="5.3.4" />
-    </ItemGroup>
-    <ItemGroup>
         <ProjectReference Include="..\GameFramework.Pro.Internal\GameFramework.Pro.Internal.csproj">
             <PrivateAssets>all</PrivateAssets>
         </ProjectReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Option.Pro" Version="1.1.1" />
+        <PackageReference Include="FluentSyntax.Pro" Version="1.0.1" />
+        <PackageReference Include="StateMachine.Pro" Version="5.3.4" />
+        <PackageReference Include="TreeMachine.Pro" Version="5.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="GameFramework.Pro.Tests" />
     </ItemGroup>
 
     <ItemGroup>
