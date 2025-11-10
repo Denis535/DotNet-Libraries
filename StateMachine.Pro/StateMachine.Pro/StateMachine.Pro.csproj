@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
         <RootNamespace />
         <Title>$(AssemblyName)</Title>
         <Product>$(AssemblyName)</Product>
@@ -15,19 +15,20 @@
         <RepositoryUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/StateMachine.Pro</RepositoryUrl>
 
         <IsPackable>true</IsPackable>
+        <IsTool>false</IsTool>
+        <DevelopmentDependency>false</DevelopmentDependency>
+
         <PackageId>$(AssemblyName)</PackageId>
         <PackageVersion>$(Version)</PackageVersion>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageIcon>Icon.png</PackageIcon>
-        <PackageIconUrl></PackageIconUrl>
         <PackageDescription>$(Description)</PackageDescription>
-        <PackageProjectUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/StateMachine.Pro</PackageProjectUrl>
         <PackageTags>state-machine stateful state pattern design-pattern</PackageTags>
+        <PackageProjectUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/StateMachine.Pro</PackageProjectUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageLicenseUrl></PackageLicenseUrl>
         <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
-        <IsTool>false</IsTool>
-        <DevelopmentDependency>false</DevelopmentDependency>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageIconUrl></PackageIconUrl>
 
         <PackRelease>true</PackRelease>
 
