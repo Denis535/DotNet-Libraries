@@ -5,19 +5,16 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <RootNamespace />
-
-        <!--Assembly attributes-->
-        <Version>5.3.4</Version>
+        <Title>$(AssemblyName)</Title>
+        <Product>$(AssemblyName)</Product>
+        <Version>5.3.5</Version>
         <Description>The library that allows you to easily implement a hierarchical object.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
-        <Product>$(AssemblyName)</Product>
         <Copyright></Copyright>
         <RepositoryUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/TreeMachine.Pro</RepositoryUrl>
 
-        <!--Package attributes-->
         <IsPackable>true</IsPackable>
-        <Title>$(AssemblyName)</Title>
         <PackageId>$(AssemblyName)</PackageId>
         <PackageVersion>$(Version)</PackageVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -25,16 +22,13 @@
         <PackageIconUrl></PackageIconUrl>
         <PackageDescription>$(Description)</PackageDescription>
         <PackageProjectUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/TreeMachine.Pro</PackageProjectUrl>
-        <PackageTags>tree-machine tree hierarchy hierarchical node design-pattern pattern</PackageTags>
-
+        <PackageTags>tree-machine tree hierarchy hierarchical node pattern design-pattern</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageLicenseUrl></PackageLicenseUrl>
         <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
-
         <IsTool>false</IsTool>
         <DevelopmentDependency>false</DevelopmentDependency>
 
-        <!--Pack options-->
         <PackRelease>true</PackRelease>
 
         <EnableDefaultItems>true</EnableDefaultItems>
@@ -44,8 +38,8 @@
 
         <IncludeBuildOutput>true</IncludeBuildOutput>
         <IncludeContentInPack>true</IncludeContentInPack>
-        <IncludeSymbols>false</IncludeSymbols>
-        <IncludeSource>false</IncludeSource>
+        <IncludeSymbols>true</IncludeSymbols>
+        <IncludeSource>true</IncludeSource>
 
         <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeBuilds</TargetsForTfmSpecificBuildOutput>
         <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeContent</TargetsForTfmSpecificContentInPackage>
@@ -68,8 +62,8 @@
 
     <Target Name="IncludeContent">
         <ItemGroup>
-            <TfmSpecificPackageFile Include="../README.md" PackagePath="/" />
             <TfmSpecificPackageFile Include="../LICENSE" PackagePath="/" />
+            <TfmSpecificPackageFile Include="../README.md" PackagePath="/" />
             <TfmSpecificPackageFile Include="../Icon.png" PackagePath="/" />
         </ItemGroup>
     </Target>
