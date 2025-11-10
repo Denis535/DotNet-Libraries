@@ -2,19 +2,20 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
+        <IsTool>false</IsTool>
+        <DevelopmentDependency>false</DevelopmentDependency>
+
         <PackageId>$(AssemblyName)</PackageId>
         <PackageVersion>$(Version)</PackageVersion>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageIcon>Icon.png</PackageIcon>
-        <PackageIconUrl></PackageIconUrl>
         <PackageDescription>$(Description)</PackageDescription>
+        <PackageTags>gamedev architecture framework game-architecture game-framework pattern design-pattern best-practices</PackageTags>
         <PackageProjectUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/GameFramework.Pro</PackageProjectUrl>
-        <PackageTags>gamedev framework architecture game-framework game-architecture best-practices</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageLicenseUrl></PackageLicenseUrl>
         <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
-        <IsTool>false</IsTool>
-        <DevelopmentDependency>false</DevelopmentDependency>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageIconUrl></PackageIconUrl>
 
         <PackRelease>true</PackRelease>
 
