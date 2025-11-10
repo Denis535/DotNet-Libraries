@@ -41,6 +41,7 @@ The framework that allows you to design high-quality architecture of your game p
 - Domain
     - GameBase2
     - PlayerBase2
+    - EntityBase2
 
 # Links
 

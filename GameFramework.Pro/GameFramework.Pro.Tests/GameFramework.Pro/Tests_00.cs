@@ -13,13 +13,14 @@ namespace GameFramework.Pro {
         }
 
     }
+    // Main
     internal class Program : ProgramBase2<Theme, Screen, Router, Application> {
 
         public Program() {
-            this.Application = new Application( this );
-            this.Router = new Router( this );
-            this.Screen = new Screen( this );
-            this.Theme = new Theme( this );
+            this.Application = new Application();
+            this.Router = new Router();
+            this.Screen = new Screen();
+            this.Theme = new Theme();
         }
         protected override void OnDispose() {
             this.Theme.Dispose();
@@ -33,9 +34,9 @@ namespace GameFramework.Pro {
     // UI
     internal class Theme : ThemeBase2<Router, Application> {
 
-        public Theme(IDependencyProvider provider) : base( provider ) {
-            this.Machine.SetRoot( new MainPlayList( this.Provider ).State, null, null );
-            this.Machine.SetRoot( new GamePlayList( this.Provider ).State, null, null );
+        public Theme() : base() {
+            this.Machine.SetRoot( new MainPlayList().State, null, null );
+            this.Machine.SetRoot( new GamePlayList().State, null, null );
         }
         protected override void OnDispose() {
             this.Machine.SetRoot( null, null, null );
@@ -45,7 +46,7 @@ namespace GameFramework.Pro {
     }
     internal class MainPlayList : PlayListBase2 {
 
-        public MainPlayList(IDependencyProvider provider) : base( provider ) {
+        public MainPlayList() : base() {
         }
         protected override void OnDispose() {
         }
@@ -58,7 +59,7 @@ namespace GameFramework.Pro {
     }
     internal class GamePlayList : PlayListBase2 {
 
-        public GamePlayList(IDependencyProvider provider) : base( provider ) {
+        public GamePlayList() : base() {
         }
         protected override void OnDispose() {
         }
@@ -72,8 +73,8 @@ namespace GameFramework.Pro {
     // UI
     internal class Screen : ScreenBase2<Router, Application> {
 
-        public Screen(IDependencyProvider provider) : base( provider ) {
-            this.Machine.SetRoot( new RootWidget( this.Provider ).Node, null, null );
+        public Screen() : base() {
+            this.Machine.SetRoot( new RootWidget().Node, null, null );
         }
         protected override void OnDispose() {
             this.Machine.SetRoot( null, null, null );
@@ -83,9 +84,9 @@ namespace GameFramework.Pro {
     }
     internal class RootWidget : WidgetBase2 {
 
-        public RootWidget(IDependencyProvider provider) : base( provider ) {
-            this.NodeMutable.AddChild( new MainWidget( this.Provider ).Node, null );
-            this.NodeMutable.AddChild( new GameWidget( this.Provider ).Node, null );
+        public RootWidget() : base() {
+            this.NodeMutable.AddChild( new MainWidget().Node, null );
+            this.NodeMutable.AddChild( new GameWidget().Node, null );
         }
         protected override void OnDispose() {
             _ = this.NodeMutable.RemoveChildren( i => true, null, null );
@@ -103,7 +104,7 @@ namespace GameFramework.Pro {
             }
         }
 
-        public MainWidget(IDependencyProvider provider) : base( provider ) {
+        public MainWidget() : base() {
             base.View = new View();
         }
         protected override void OnDispose() {
@@ -122,7 +123,7 @@ namespace GameFramework.Pro {
             }
         }
 
-        public GameWidget(IDependencyProvider provider) : base( provider ) {
+        public GameWidget() : base() {
             base.View = new View();
         }
         protected override void OnDispose() {
@@ -138,7 +139,7 @@ namespace GameFramework.Pro {
     // UI
     internal class Router : RouterBase2<Theme, Screen, Application> {
 
-        public Router(IDependencyProvider provider) : base( provider ) {
+        public Router() : base() {
         }
         protected override void OnDispose() {
             base.OnDispose();
@@ -150,8 +151,8 @@ namespace GameFramework.Pro {
 
         private Game Game { get; init; }
 
-        public Application(IDependencyProvider provider) : base( provider ) {
-            this.Game = new Game( provider );
+        public Application() : base() {
+            this.Game = new Game();
         }
         protected override void OnDispose() {
             this.Game.Dispose();
@@ -165,8 +166,8 @@ namespace GameFramework.Pro {
         private Player Player { get; init; }
         private Entity Entity { get; init; }
 
-        public Game(IDependencyProvider provider) : base( provider ) {
-            this.Player = new Player( provider );
+        public Game() : base() {
+            this.Player = new Player();
             this.Entity = new Entity();
         }
         protected override void OnDispose() {
@@ -178,7 +179,7 @@ namespace GameFramework.Pro {
     }
     internal class Player : PlayerBase2 {
 
-        public Player(IDependencyProvider provider) : base( provider ) {
+        public Player() : base() {
         }
         protected override void OnDispose() {
             base.OnDispose();

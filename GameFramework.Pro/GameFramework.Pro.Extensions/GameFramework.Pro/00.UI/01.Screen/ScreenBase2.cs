@@ -8,14 +8,13 @@ namespace GameFramework.Pro {
         where TRouter : RouterBase
         where TApplication : ApplicationBase {
 
-        private readonly IDependencyProvider m_Provider;
         private readonly TRouter m_Router;
         private readonly TApplication m_Application;
 
         protected IDependencyProvider Provider {
             get {
                 Assert.Operation.NotDisposed( $"Screen {this} must be non-disposed", !this.IsDisposed );
-                return this.m_Provider;
+                return IDependencyProvider.Instance;
             }
         }
         protected TRouter Router {
@@ -31,10 +30,9 @@ namespace GameFramework.Pro {
             }
         }
 
-        public ScreenBase2(IDependencyProvider provider) {
-            this.m_Provider = provider ?? throw new ArgumentNullException( nameof( provider ) );
-            this.m_Router = provider.RequireDependency<TRouter>();
-            this.m_Application = provider.RequireDependency<TApplication>();
+        public ScreenBase2() {
+            this.m_Router = this.Provider.RequireDependency<TRouter>();
+            this.m_Application = this.Provider.RequireDependency<TApplication>();
         }
         protected override void OnDispose() {
             base.OnDispose();

@@ -6,6 +6,18 @@ namespace System {
 
     public interface IDependencyProvider {
 
+        private static IDependencyProvider? m_Instance;
+
+        internal static IDependencyProvider Instance {
+            get {
+                return m_Instance ?? throw new Exception( "Instance must be non-null" );
+            }
+            set {
+                Assert.Operation.Valid( $"Instance {m_Instance} must be null", m_Instance == null );
+                m_Instance = value ?? throw new ArgumentException( "Value must be non-null" );
+            }
+        }
+
         public sealed T? GetDependency<T>(object? argument = null) where T : notnull {
             var value = this.GetValue( typeof( T ), argument );
             return (T?) value;

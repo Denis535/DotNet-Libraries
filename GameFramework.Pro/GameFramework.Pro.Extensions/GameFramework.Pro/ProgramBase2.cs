@@ -61,6 +61,7 @@ namespace GameFramework.Pro {
         }
 
         public ProgramBase2() {
+            IDependencyProvider.Instance = this;
         }
         protected override void OnDispose() {
             base.OnDispose();

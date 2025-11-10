@@ -6,17 +6,14 @@ namespace GameFramework.Pro {
 
     public abstract class PlayListBase2 : PlayListBase {
 
-        private readonly IDependencyProvider m_Provider;
-
         protected IDependencyProvider Provider {
             get {
                 Assert.Operation.Valid( $"PlayList {this} must be non-disposed", !this.IsDisposed );
-                return this.m_Provider;
+                return IDependencyProvider.Instance;
             }
         }
 
-        public PlayListBase2(IDependencyProvider provider) {
-            this.m_Provider = provider ?? throw new ArgumentNullException( nameof( provider ) );
+        public PlayListBase2() {
         }
 
     }

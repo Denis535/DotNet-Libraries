@@ -6,17 +6,14 @@ namespace GameFramework.Pro {
 
     public abstract class ApplicationBase2 : ApplicationBase {
 
-        private readonly IDependencyProvider m_Provider;
-
         protected IDependencyProvider Provider {
             get {
                 Assert.Operation.NotDisposed( $"Application {this} must be non-disposed", !this.IsDisposed );
-                return this.m_Provider;
+                return IDependencyProvider.Instance;
             }
         }
 
-        public ApplicationBase2(IDependencyProvider provider) {
-            this.m_Provider = provider ?? throw new ArgumentNullException( nameof( provider ) );
+        public ApplicationBase2() {
         }
         protected override void OnDispose() {
             base.OnDispose();

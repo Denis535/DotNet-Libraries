@@ -6,34 +6,28 @@ namespace GameFramework.Pro {
 
     public abstract class WidgetBase2 : WidgetBase {
 
-        private readonly IDependencyProvider m_Provider;
-
         protected IDependencyProvider Provider {
             get {
                 Assert.Operation.NotDisposed( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_Provider;
+                return IDependencyProvider.Instance;
             }
         }
 
-        public WidgetBase2(IDependencyProvider provider) {
-            this.m_Provider = provider ?? throw new ArgumentNullException( nameof( provider ) );
+        public WidgetBase2() {
         }
 
     }
     public abstract class ViewableWidgetBase2<TView> : ViewableWidgetBase<TView>
         where TView : notnull {
 
-        private readonly IDependencyProvider m_Provider;
-
         protected IDependencyProvider Provider {
             get {
                 Assert.Operation.NotDisposed( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_Provider;
+                return IDependencyProvider.Instance;
             }
         }
 
-        public ViewableWidgetBase2(IDependencyProvider provider) {
-            this.m_Provider = provider ?? throw new ArgumentNullException( nameof( provider ) );
+        public ViewableWidgetBase2() {
         }
 
     }
