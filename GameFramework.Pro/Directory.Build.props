@@ -1,4 +1,5 @@
 <Project>
+    
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latest</LangVersion>
@@ -14,4 +15,5 @@
         <RepositoryUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/GameFramework.Pro</RepositoryUrl>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
+    
 </Project>
