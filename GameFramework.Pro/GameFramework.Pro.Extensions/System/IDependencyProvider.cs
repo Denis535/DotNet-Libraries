@@ -2,19 +2,26 @@
 namespace System {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
     public interface IDependencyProvider {
 
         private static IDependencyProvider? m_Instance;
 
+        [AllowNull]
         internal static IDependencyProvider Instance {
             get {
                 return m_Instance ?? throw new Exception( "Instance must be non-null" );
             }
             set {
-                Assert.Operation.Valid( $"Instance {m_Instance} must be null", m_Instance == null );
-                m_Instance = value ?? throw new ArgumentException( "Value must be non-null" );
+                if (value != null) {
+                    Assert.Operation.Valid( $"Instance {m_Instance} must be null", m_Instance == null );
+                    m_Instance = value;
+                } else {
+                    Assert.Operation.Valid( $"Instance must be non-null", m_Instance != null );
+                    m_Instance = null;
+                }
             }
         }
 
