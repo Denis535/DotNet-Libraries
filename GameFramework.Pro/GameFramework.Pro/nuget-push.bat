@@ -6,19 +6,20 @@ set "PACKAGE_DIR=bin\Release"
 
 if "%API_KEY%"=="" (
     echo ERROR: NUGET_API_KEY environment variable is not set.
+    echo --------------------------------------------------
     goto :end
 )
 
 if not exist "%PACKAGE_DIR%\*.nupkg" (
     echo ERROR: No packages found in "%PACKAGE_DIR%".
+    echo --------------------------------------------------
     goto :end
 )
 
-echo Publishing packages: "%PACKAGE_DIR%"
-for %%f in (%PACKAGE_DIR%\*.nupkg) do (
-    echo --------------------------------------------------
-    echo Publishing package: %%~nxf
+echo Publishing started: "%PACKAGE_DIR%".
+echo --------------------------------------------------
 
+for %%f in (%PACKAGE_DIR%\*.nupkg) do (
     dotnet nuget push "%%f" ^
         --api-key %API_KEY% ^
         --source https://api.nuget.org/v3/index.json ^
@@ -26,17 +27,17 @@ for %%f in (%PACKAGE_DIR%\*.nupkg) do (
         --skip-duplicate
 
     if errorlevel 1 (
-        echo ERROR: Failed to publish: %%~nxf
+        echo ERROR: Failed to publish: %%~nxf.
+        echo --------------------------------------------------
         goto :end
     )
 
-    echo Package published: %%~nxf
+    echo --------------------------------------------------
 )
 
+echo Publishing completed.
 echo --------------------------------------------------
-echo All packages have been published successfully.
 
 :end
-echo --------------------------------------------------
 endlocal
 pause
