@@ -8,7 +8,7 @@ namespace GameFramework.Pro {
 
         public ApplicationBase() {
         }
-        protected override void OnDispose() {
+        internal override void OnDisposeInternal() {
         }
 
     }

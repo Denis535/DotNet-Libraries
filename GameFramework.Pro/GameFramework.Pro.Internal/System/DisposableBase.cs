@@ -43,11 +43,13 @@ namespace System {
             this.m_Lifecycle = Lifecycle.Disposing;
             {
                 this.OnDispose();
+                this.OnDisposeInternal();
                 this.m_DisposeCancellationTokenSource?.Cancel();
             }
             this.m_Lifecycle = Lifecycle.Disposed;
         }
         protected abstract void OnDispose();
+        internal abstract void OnDisposeInternal();
 
     }
 }

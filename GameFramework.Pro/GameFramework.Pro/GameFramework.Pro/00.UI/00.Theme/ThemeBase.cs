@@ -19,7 +19,7 @@ namespace GameFramework.Pro {
         public ThemeBase() {
             this.m_Machine = new StateMachine<ThemeBase, PlayListBase>( this );
         }
-        protected override void OnDispose() {
+        internal override void OnDisposeInternal() {
             this.Machine.Dispose();
         }
 

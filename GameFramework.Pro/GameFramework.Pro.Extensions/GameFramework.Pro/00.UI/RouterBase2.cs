@@ -29,8 +29,8 @@ namespace GameFramework.Pro {
         public RouterBase2() {
             this.m_Application = this.Provider.RequireDependency<TApplication>();
         }
-        protected override void OnDispose() {
-            base.OnDispose();
+        internal override void OnDisposeInternal() {
+            base.OnDisposeInternal();
         }
 
     }

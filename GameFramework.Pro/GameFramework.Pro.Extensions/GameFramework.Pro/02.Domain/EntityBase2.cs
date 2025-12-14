@@ -15,8 +15,8 @@ namespace GameFramework.Pro {
 
         public EntityBase2() {
         }
-        protected override void OnDispose() {
-            base.OnDispose();
+        internal override void OnDisposeInternal() {
+            base.OnDisposeInternal();
         }
 
     }

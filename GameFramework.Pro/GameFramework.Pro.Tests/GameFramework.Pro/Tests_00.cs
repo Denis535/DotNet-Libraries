@@ -27,7 +27,6 @@ namespace GameFramework.Pro {
             this.Screen.Dispose();
             this.Router.Dispose();
             this.Application.Dispose();
-            base.OnDispose();
         }
 
     }
@@ -40,7 +39,6 @@ namespace GameFramework.Pro {
         }
         protected override void OnDispose() {
             this.Machine.SetRoot( null, null, null );
-            base.OnDispose();
         }
 
     }
@@ -78,7 +76,6 @@ namespace GameFramework.Pro {
         }
         protected override void OnDispose() {
             this.Machine.SetRoot( null, null, null );
-            base.OnDispose();
         }
 
     }
@@ -142,7 +139,6 @@ namespace GameFramework.Pro {
         public Router() : base() {
         }
         protected override void OnDispose() {
-            base.OnDispose();
         }
 
     }
@@ -156,7 +152,6 @@ namespace GameFramework.Pro {
         }
         protected override void OnDispose() {
             this.Game.Dispose();
-            base.OnDispose();
         }
 
     }
@@ -173,7 +168,6 @@ namespace GameFramework.Pro {
         protected override void OnDispose() {
             this.Entity.Dispose();
             this.Player.Dispose();
-            base.OnDispose();
         }
 
     }
@@ -182,7 +176,6 @@ namespace GameFramework.Pro {
         public Player() : base() {
         }
         protected override void OnDispose() {
-            base.OnDispose();
         }
 
     }
@@ -191,7 +184,6 @@ namespace GameFramework.Pro {
         public Entity() {
         }
         protected override void OnDispose() {
-            base.OnDispose();
         }
 
     }
