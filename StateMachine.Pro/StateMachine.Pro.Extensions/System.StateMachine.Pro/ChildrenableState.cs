@@ -260,7 +260,7 @@ namespace System.StateMachine.Pro {
             if (callback != null) {
                 callback.Invoke( child, argument );
             } else {
-                child.Dispose();
+                ((IDisposable) child).Dispose();
             }
         }
         public int RemoveChildren(Func<IState, bool> predicate, object? argument, Action<IState, object?>? callback = null) {

@@ -5,7 +5,7 @@ namespace System.StateMachine.Pro {
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
-    public partial interface IState : IDisposable {
+    public partial interface IState {
 
         // IsDisposed
         public bool IsDisposing { get; }

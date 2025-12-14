@@ -93,7 +93,7 @@ namespace System.StateMachine.Pro {
             if (callback != null) {
                 callback.Invoke( root, argument );
             } else {
-                root.Dispose();
+                ((IDisposable) root).Dispose();
             }
         }
 

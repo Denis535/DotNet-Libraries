@@ -76,7 +76,7 @@ namespace System.StateMachine.Pro {
                 }
                 {
                     // machine.Root.Dispose
-                    machine.Root.Dispose();
+                    ((IDisposable) machine.Root).Dispose();
                     Assert.That( machine.Root.IsDisposed, Is.True );
                 }
             }
