@@ -1,18 +1,14 @@
 # Overview
+
 The library that allows you to easily implement a hierarchical object.
 
 # Reference
 
 ###### System.TreeMachine.Pro
 
-- ITreeMachine
-- INode
+- ITreeMachine (TreeMachine)
+- INode (Node)
 - Activity
-
-###### System.TreeMachine.Pro
-
-- TreeMachine
-- Node
 
 # Links
 
