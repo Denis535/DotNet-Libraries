@@ -121,12 +121,12 @@ namespace System.TreeMachine.Pro {
                     }
                     //  machine.Root.Children.Reverse.Dispose
                     foreach (var child in machine.Root.Children.Reverse()) {
-                        child.Dispose();
+                        ((IDisposable) child).Dispose();
                         Assert.That( child.IsDisposed, Is.True );
                     }
                 }
                 // machine.Root.Dispose
-                machine.Root.Dispose();
+                ((IDisposable) machine.Root).Dispose();
                 Assert.That( machine.Root.IsDisposed, Is.True );
             }
         }

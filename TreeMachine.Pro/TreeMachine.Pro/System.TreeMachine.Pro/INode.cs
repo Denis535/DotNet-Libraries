@@ -5,7 +5,7 @@ namespace System.TreeMachine.Pro {
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
-    public partial interface INode : IDisposable {
+    public partial interface INode {
 
         // IsDisposed
         public bool IsDisposing { get; }

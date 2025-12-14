@@ -4,7 +4,7 @@ namespace System.TreeMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public interface ITreeMachine : IDisposable {
+    public interface ITreeMachine {
 
         // IsDisposed
         public bool IsDisposing { get; }

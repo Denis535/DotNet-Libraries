@@ -275,7 +275,7 @@ namespace System.TreeMachine.Pro {
             if (callback != null) {
                 callback.Invoke( child, argument );
             } else {
-                child.Dispose();
+                ((IDisposable) child).Dispose();
             }
         }
         public int RemoveChildren(Func<INode, bool> predicate, object? argument, Action<INode, object?>? callback = null) {
