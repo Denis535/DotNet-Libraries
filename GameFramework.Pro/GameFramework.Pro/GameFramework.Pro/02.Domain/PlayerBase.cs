@@ -8,7 +8,7 @@ namespace GameFramework.Pro {
 
         public PlayerBase() {
         }
-        internal override void OnDisposeInternal() {
+        private protected override void OnDisposeInternal() {
         }
 
     }

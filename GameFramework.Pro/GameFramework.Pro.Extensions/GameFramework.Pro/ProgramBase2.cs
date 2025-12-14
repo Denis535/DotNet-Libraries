@@ -63,7 +63,7 @@ namespace GameFramework.Pro {
         public ProgramBase2() {
             IDependencyProvider.Instance = this;
         }
-        internal override void OnDisposeInternal() {
+        private protected override void OnDisposeInternal() {
             IDependencyProvider.Instance = null;
             base.OnDisposeInternal();
         }

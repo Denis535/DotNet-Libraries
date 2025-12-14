@@ -19,7 +19,7 @@ namespace GameFramework.Pro {
         public ScreenBase() {
             this.m_Machine = new TreeMachine<ScreenBase, WidgetBase>( this );
         }
-        internal override void OnDisposeInternal() {
+        private protected override void OnDisposeInternal() {
             this.Machine.Dispose();
         }
 

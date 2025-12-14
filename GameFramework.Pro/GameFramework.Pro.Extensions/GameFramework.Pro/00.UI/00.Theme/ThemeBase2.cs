@@ -34,7 +34,7 @@ namespace GameFramework.Pro {
             this.m_Router = this.Provider.RequireDependency<TRouter>();
             this.m_Application = this.Provider.RequireDependency<TApplication>();
         }
-        internal override void OnDisposeInternal() {
+        private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
 

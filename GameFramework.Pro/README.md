@@ -11,7 +11,8 @@ The framework that allows you to design high-quality architecture of your game p
 
 ###### GameFramework.Pro
 
-- ProgramBase
+- Main
+    - ProgramBase
 - UI
     - ThemeBase
     - PlayListBase
@@ -28,7 +29,8 @@ The framework that allows you to design high-quality architecture of your game p
 
 ###### GameFramework.Pro
 
-- ProgramBase2
+- Main
+    - ProgramBase2
 - UI
     - ThemeBase2
     - PlayListBase2

@@ -49,7 +49,7 @@ namespace System {
             this.m_Lifecycle = Lifecycle.Disposed;
         }
         protected abstract void OnDispose();
-        internal abstract void OnDisposeInternal();
+        private protected abstract void OnDisposeInternal();
 
     }
 }

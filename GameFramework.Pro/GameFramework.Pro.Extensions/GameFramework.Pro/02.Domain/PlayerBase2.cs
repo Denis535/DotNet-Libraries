@@ -15,7 +15,7 @@ namespace GameFramework.Pro {
 
         public PlayerBase2() {
         }
-        internal override void OnDisposeInternal() {
+        private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
 
