@@ -4,17 +4,14 @@ namespace System.TreeMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public interface ITreeMachine<TMachineUserData, TNodeUserData> : IDisposable {
+    public interface ITreeMachine : IDisposable {
 
         // IsDisposed
         public bool IsDisposing { get; }
         public bool IsDisposed { get; }
 
         // Root
-        public INode<TMachineUserData, TNodeUserData>? Root { get; }
-
-        // UserData
-        public TMachineUserData UserData { get; }
+        public INode? Root { get; }
 
     }
 }

@@ -5,7 +5,7 @@ namespace System.TreeMachine.Pro {
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
-    public partial interface INode<TMachineUserData, TNodeUserData> : IDisposable {
+    public partial interface INode : IDisposable {
 
         // IsDisposed
         public bool IsDisposing { get; }
@@ -15,38 +15,35 @@ namespace System.TreeMachine.Pro {
         public object? Owner { get; }
 
         // Machine
-        public ITreeMachine<TMachineUserData, TNodeUserData>? Machine { get; }
+        public ITreeMachine? Machine { get; }
 
         // Root
         [MemberNotNullWhen( false, nameof( Parent ) )] public bool IsRoot { get; }
-        public INode<TMachineUserData, TNodeUserData> Root { get; }
+        public INode Root { get; }
 
         // Parent
-        public INode<TMachineUserData, TNodeUserData>? Parent { get; }
-        public IEnumerable<INode<TMachineUserData, TNodeUserData>> Ancestors { get; }
-        public IEnumerable<INode<TMachineUserData, TNodeUserData>> AncestorsAndSelf { get; }
+        public INode? Parent { get; }
+        public IEnumerable<INode> Ancestors { get; }
+        public IEnumerable<INode> AncestorsAndSelf { get; }
 
         // Activity
         public Activity Activity { get; }
 
         // Children
-        public IEnumerable<INode<TMachineUserData, TNodeUserData>> Children { get; }
-        public IEnumerable<INode<TMachineUserData, TNodeUserData>> Descendants { get; }
-        public IEnumerable<INode<TMachineUserData, TNodeUserData>> DescendantsAndSelf { get; }
-
-        // UserData
-        public TNodeUserData UserData { get; }
+        public IEnumerable<INode> Children { get; }
+        public IEnumerable<INode> Descendants { get; }
+        public IEnumerable<INode> DescendantsAndSelf { get; }
 
     }
-    public partial interface INode<TMachineUserData, TNodeUserData> {
+    public partial interface INode {
 
         // Attach
-        protected internal void Attach(ITreeMachine<TMachineUserData, TNodeUserData> machine, object? argument);
-        protected internal void Attach(INode<TMachineUserData, TNodeUserData> parent, object? argument);
+        protected internal void Attach(ITreeMachine machine, object? argument);
+        protected internal void Attach(INode parent, object? argument);
 
         // Detach
-        protected internal void Detach(ITreeMachine<TMachineUserData, TNodeUserData> machine, object? argument);
-        protected internal void Detach(INode<TMachineUserData, TNodeUserData> parent, object? argument);
+        protected internal void Detach(ITreeMachine machine, object? argument);
+        protected internal void Detach(INode parent, object? argument);
 
         // Activate
         protected internal void Activate(object? argument);
