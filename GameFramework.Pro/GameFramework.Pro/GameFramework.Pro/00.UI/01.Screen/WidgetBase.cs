@@ -6,14 +6,44 @@ namespace GameFramework.Pro {
     using System.Text;
     using System.TreeMachine.Pro;
 
+    internal sealed class Node : System.TreeMachine.Pro.Node {
+
+        public WidgetBase Widget { get; }
+
+        public Node(WidgetBase widget) {
+            this.Widget = widget;
+        }
+        protected override void OnDispose() {
+            this.Widget.OnDispose();
+        }
+
+        protected override void OnActivate(object? argument) {
+            foreach (var ancestor in this.Ancestors.ToList().AsEnumerable().Reverse()) { // top-down
+                ancestor.Widget().OnBeforeDescendantActivate( this, argument );
+            }
+            this.Widget.OnActivate( argument );
+            foreach (var ancestor in this.Ancestors.ToList()) { // down-top
+                ancestor.Widget().OnAfterDescendantActivate( this, argument );
+            }
+        }
+        protected override void OnDeactivate(object? argument) {
+            foreach (var ancestor in this.Ancestors.ToList().AsEnumerable().Reverse()) { // top-down
+                ancestor.Widget().OnBeforeDescendantDeactivate( this, argument );
+            }
+            this.Widget.OnDeactivate( argument );
+            foreach (var ancestor in this.Ancestors.ToList()) { // down-top
+                ancestor.Widget().OnAfterDescendantDeactivate( this, argument );
+            }
+        }
+
+        protected override void Sort(List<INode> children) {
+            this.Widget.Sort( children );
+        }
+
+    }
     public abstract class WidgetBase {
 
-        private readonly Node<ScreenBase, WidgetBase> m_Node;
-
-        private readonly Action<INode<ScreenBase, WidgetBase>, object?>? m_OnBeforeDescendantActivateCallback;
-        private readonly Action<INode<ScreenBase, WidgetBase>, object?>? m_OnAfterDescendantActivateCallback;
-        private readonly Action<INode<ScreenBase, WidgetBase>, object?>? m_OnBeforeDescendantDeactivateCallback;
-        private readonly Action<INode<ScreenBase, WidgetBase>, object?>? m_OnAfterDescendantDeactivateCallback;
+        private readonly Node m_Node;
 
         public bool IsDisposing {
             get {
@@ -26,109 +56,37 @@ namespace GameFramework.Pro {
             }
         }
 
-        protected ScreenBase? Screen {
-            get {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_Node.Machine?.UserData;
-            }
-        }
-        public INode<ScreenBase, WidgetBase> Node {
+        public INode Node {
             get {
                 Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Node;
             }
         }
-        protected Node<ScreenBase, WidgetBase> NodeMutable {
+        protected System.TreeMachine.Pro.Node NodeMutable {
             get {
                 Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Node;
-            }
-        }
-
-        public Action<INode<ScreenBase, WidgetBase>, object?>? OnBeforeDescendantActivateCallback {
-            get {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_OnBeforeDescendantActivateCallback;
-            }
-            init {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                this.m_OnBeforeDescendantActivateCallback = value;
-            }
-        }
-        public Action<INode<ScreenBase, WidgetBase>, object?>? OnAfterDescendantActivateCallback {
-            get {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_OnAfterDescendantActivateCallback;
-            }
-            init {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                this.m_OnAfterDescendantActivateCallback = value;
-            }
-        }
-        public Action<INode<ScreenBase, WidgetBase>, object?>? OnBeforeDescendantDeactivateCallback {
-            get {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_OnBeforeDescendantDeactivateCallback;
-            }
-            init {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                this.m_OnBeforeDescendantDeactivateCallback = value;
-            }
-        }
-        public Action<INode<ScreenBase, WidgetBase>, object?>? OnAfterDescendantDeactivateCallback {
-            get {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                return this.m_OnAfterDescendantDeactivateCallback;
-            }
-            init {
-                Assert.Operation.Valid( $"Widget {this} must be non-disposed", !this.IsDisposed );
-                this.m_OnAfterDescendantDeactivateCallback = value;
             }
         }
 
         public WidgetBase() {
-            this.m_Node = new Node<ScreenBase, WidgetBase>( this ) {
-                SortDelegate = this.Sort,
-                OnDisposeCallback = this.OnDispose,
-                OnActivateCallback = (argument) => {
-                    foreach (var ancestor in this.Node.Ancestors.ToList().AsEnumerable().Reverse()) { // root-down
-                        ancestor.UserData.OnBeforeDescendantActivateCallback?.Invoke( this.Node, argument );
-                        ancestor.UserData.OnBeforeDescendantActivate( this.Node, argument );
-                    }
-                    this.OnActivate( argument );
-                    foreach (var ancestor in this.Node.Ancestors.ToList()) { // down-root
-                        ancestor.UserData.OnAfterDescendantActivate( this.Node, argument );
-                        ancestor.UserData.OnAfterDescendantActivateCallback?.Invoke( this.Node, argument );
-                    }
-                },
-                OnDeactivateCallback = (argument) => {
-                    foreach (var ancestor in this.Node.Ancestors.ToList().AsEnumerable().Reverse()) { // root-down
-                        ancestor.UserData.OnBeforeDescendantDeactivateCallback?.Invoke( this.Node, argument );
-                        ancestor.UserData.OnBeforeDescendantDeactivate( this.Node, argument );
-                    }
-                    this.OnDeactivate( argument );
-                    foreach (var ancestor in this.Node.Ancestors.ToList()) { // down-root
-                        ancestor.UserData.OnAfterDescendantDeactivate( this.Node, argument );
-                        ancestor.UserData.OnAfterDescendantDeactivateCallback?.Invoke( this.Node, argument );
-                    }
-                },
-            };
+            this.m_Node = new Node( this );
         }
-        protected abstract void OnDispose();
+        protected internal abstract void OnDispose();
 
-        protected abstract void OnActivate(object? argument);
-        protected abstract void OnDeactivate(object? argument);
+        protected internal abstract void OnActivate(object? argument);
+        protected internal abstract void OnDeactivate(object? argument);
 
-        protected virtual void OnBeforeDescendantActivate(INode<ScreenBase, WidgetBase> descendant, object? argument) {
+        protected internal virtual void OnBeforeDescendantActivate(INode descendant, object? argument) {
         }
-        protected virtual void OnAfterDescendantActivate(INode<ScreenBase, WidgetBase> descendant, object? argument) {
+        protected internal virtual void OnAfterDescendantActivate(INode descendant, object? argument) {
         }
-        protected virtual void OnBeforeDescendantDeactivate(INode<ScreenBase, WidgetBase> descendant, object? argument) {
+        protected internal virtual void OnBeforeDescendantDeactivate(INode descendant, object? argument) {
         }
-        protected virtual void OnAfterDescendantDeactivate(INode<ScreenBase, WidgetBase> descendant, object? argument) {
+        protected internal virtual void OnAfterDescendantDeactivate(INode descendant, object? argument) {
         }
 
-        protected virtual void Sort(List<INode<ScreenBase, WidgetBase>> children) {
+        protected internal virtual void Sort(List<INode> children) {
         }
 
     }

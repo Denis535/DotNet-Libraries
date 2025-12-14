@@ -2,6 +2,7 @@
 namespace GameFramework.Pro {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using NUnit.Framework;
 
@@ -38,7 +39,7 @@ namespace GameFramework.Pro {
             this.Machine.SetRoot( new GamePlayList().State, null, null );
         }
         protected override void OnDispose() {
-            this.Machine.SetRoot( null, null, null );
+            ((IDisposable?) this.Machine.Root)!.Dispose();
         }
 
     }
@@ -46,12 +47,12 @@ namespace GameFramework.Pro {
 
         public MainPlayList() : base() {
         }
-        protected override void OnDispose() {
+        protected internal override void OnDispose() {
         }
 
-        protected override void OnActivate(object? argument) {
+        protected internal override void OnActivate(object? argument) {
         }
-        protected override void OnDeactivate(object? argument) {
+        protected internal override void OnDeactivate(object? argument) {
         }
 
     }
@@ -59,12 +60,12 @@ namespace GameFramework.Pro {
 
         public GamePlayList() : base() {
         }
-        protected override void OnDispose() {
+        protected internal override void OnDispose() {
         }
 
-        protected override void OnActivate(object? argument) {
+        protected internal override void OnActivate(object? argument) {
         }
-        protected override void OnDeactivate(object? argument) {
+        protected internal override void OnDeactivate(object? argument) {
         }
 
     }
@@ -75,7 +76,7 @@ namespace GameFramework.Pro {
             this.Machine.SetRoot( new RootWidget().Node, null, null );
         }
         protected override void OnDispose() {
-            this.Machine.SetRoot( null, null, null );
+            ((IDisposable?) this.Machine.Root)!.Dispose();
         }
 
     }
@@ -85,13 +86,15 @@ namespace GameFramework.Pro {
             this.NodeMutable.AddChild( new MainWidget().Node, null );
             this.NodeMutable.AddChild( new GameWidget().Node, null );
         }
-        protected override void OnDispose() {
-            _ = this.NodeMutable.RemoveChildren( i => true, null, null );
+        protected internal override void OnDispose() {
+            foreach (var child in this.NodeMutable.Children.Reverse()) {
+                ((IDisposable) child).Dispose();
+            }
         }
 
-        protected override void OnActivate(object? argument) {
+        protected internal override void OnActivate(object? argument) {
         }
-        protected override void OnDeactivate(object? argument) {
+        protected internal override void OnDeactivate(object? argument) {
         }
 
     }
@@ -104,13 +107,15 @@ namespace GameFramework.Pro {
         public MainWidget() : base() {
             base.View = new View();
         }
-        protected override void OnDispose() {
-            _ = this.NodeMutable.RemoveChildren( i => true, null, null );
+        protected internal override void OnDispose() {
+            foreach (var child in this.NodeMutable.Children.Reverse()) {
+                ((IDisposable) child).Dispose();
+            }
         }
 
-        protected override void OnActivate(object? argument) {
+        protected internal override void OnActivate(object? argument) {
         }
-        protected override void OnDeactivate(object? argument) {
+        protected internal override void OnDeactivate(object? argument) {
         }
 
     }
@@ -123,13 +128,15 @@ namespace GameFramework.Pro {
         public GameWidget() : base() {
             base.View = new View();
         }
-        protected override void OnDispose() {
-            _ = this.NodeMutable.RemoveChildren( i => true, null, null );
+        protected internal override void OnDispose() {
+            foreach (var child in this.NodeMutable.Children.Reverse()) {
+                ((IDisposable) child).Dispose();
+            }
         }
 
-        protected override void OnActivate(object? argument) {
+        protected internal override void OnActivate(object? argument) {
         }
-        protected override void OnDeactivate(object? argument) {
+        protected internal override void OnDeactivate(object? argument) {
         }
 
     }

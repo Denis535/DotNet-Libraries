@@ -7,11 +7,11 @@ namespace GameFramework.Pro {
 
     public static class ThemeExtensions {
 
-        public static PlayListBase PlayList(this IState<ThemeBase, PlayListBase> state) {
-            return state.UserData;
+        public static PlayListBase PlayList(this IState state) {
+            return ((State) state).PlayList;
         }
-        public static T PlayList<T>(this IState<ThemeBase, PlayListBase> state) where T : notnull, PlayListBase {
-            return (T) state.UserData;
+        public static T PlayList<T>(this IState state) where T : notnull, PlayListBase {
+            return (T) state.PlayList();
         }
 
     }

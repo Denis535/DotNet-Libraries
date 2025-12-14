@@ -7,11 +7,11 @@ namespace GameFramework.Pro {
 
     public static class ScreenExtensions {
 
-        public static WidgetBase Widget(this INode<ScreenBase, WidgetBase> node) {
-            return node.UserData;
+        public static WidgetBase Widget(this INode node) {
+            return ((Node) node).Widget;
         }
-        public static T Widget<T>(this INode<ScreenBase, WidgetBase> node) where T : notnull, WidgetBase {
-            return (T) node.UserData;
+        public static T Widget<T>(this INode node) where T : notnull, WidgetBase {
+            return (T) node.Widget();
         }
 
     }
