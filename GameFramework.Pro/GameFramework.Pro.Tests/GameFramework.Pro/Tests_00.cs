@@ -87,9 +87,7 @@ namespace GameFramework.Pro {
             this.NodeMutable.AddChild( new GameWidget().Node, null );
         }
         protected internal override void OnDispose() {
-            foreach (var child in this.NodeMutable.Children.Reverse()) {
-                ((IDisposable) child).Dispose();
-            }
+            this.NodeMutable.Children.Cast<IDisposable>().Reverse().DisposeAll();
         }
 
         protected internal override void OnActivate(object? argument) {
@@ -108,9 +106,7 @@ namespace GameFramework.Pro {
             base.View = new View();
         }
         protected internal override void OnDispose() {
-            foreach (var child in this.NodeMutable.Children.Reverse()) {
-                ((IDisposable) child).Dispose();
-            }
+            this.NodeMutable.Children.Cast<IDisposable>().Reverse().DisposeAll();
         }
 
         protected internal override void OnActivate(object? argument) {
@@ -129,9 +125,7 @@ namespace GameFramework.Pro {
             base.View = new View();
         }
         protected internal override void OnDispose() {
-            foreach (var child in this.NodeMutable.Children.Reverse()) {
-                ((IDisposable) child).Dispose();
-            }
+            this.NodeMutable.Children.Cast<IDisposable>().Reverse().DisposeAll();
         }
 
         protected internal override void OnActivate(object? argument) {
