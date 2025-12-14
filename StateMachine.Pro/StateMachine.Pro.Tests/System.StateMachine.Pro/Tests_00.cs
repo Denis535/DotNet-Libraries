@@ -9,8 +9,7 @@ namespace System.StateMachine.Pro {
 
         [Test]
         public void Test_00() {
-            var machine = new StateMachine();
-            using (machine) {
+            using (var machine = new StateMachine()) {
                 {
                     // machine.SetState State
                     machine.SetRoot( new State(), null, null );
@@ -41,8 +40,7 @@ namespace System.StateMachine.Pro {
 
         [Test]
         public void Test_01() {
-            var machine = new StateMachine();
-            using (machine) {
+            using (var machine = new StateMachine()) {
                 {
                     // machine.SetState State
                     machine.SetRoot( new State(), null, null );
