@@ -5,16 +5,9 @@ The library that allows you to easily implement a stateful object.
 
 ###### System.StateMachine.Pro
 
-- IStateMachine
-- IState
+- IStateMachine (StateMachine)
+- IState (State, ChildrenableState)
 - Activity
-
-###### System.StateMachine.Pro
-
-- StateMachine
-- State
-- ChildableState
-- ChildrenableState
 
 # Links
 

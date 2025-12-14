@@ -4,16 +4,13 @@ namespace System.StateMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public sealed partial class StateMachine<TMachineUserData, TStateUserData> : IStateMachine<TMachineUserData, TStateUserData>, IDisposable {
+    public sealed partial class StateMachine : IStateMachine, IDisposable {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
-        private IState<TMachineUserData, TStateUserData>? m_Root = null;
-        private readonly TMachineUserData m_UserData = default!;
-
-        private readonly Action? m_OnDisposeCallback = null;
+        private IState? m_Root = null;
 
     }
-    public sealed partial class StateMachine<TMachineUserData, TStateUserData> {
+    public sealed partial class StateMachine {
 
         // IsDisposed
         public bool IsDisposing {
@@ -28,7 +25,7 @@ namespace System.StateMachine.Pro {
         }
 
         // Root
-        public IState<TMachineUserData, TStateUserData>? Root {
+        public IState? Root {
             get {
                 Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Root;
@@ -44,53 +41,26 @@ namespace System.StateMachine.Pro {
             }
         }
 
-        // UserData
-        public TMachineUserData UserData {
-            get {
-                Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
-                return this.m_UserData;
-            }
-        }
-
-        // OnDispose
-        public Action? OnDisposeCallback {
-            get {
-                Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
-                return this.m_OnDisposeCallback;
-            }
-            init {
-                Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
-                this.m_OnDisposeCallback = value;
-            }
-        }
-
     }
-    public sealed partial class StateMachine<TMachineUserData, TStateUserData> {
+    public sealed partial class StateMachine {
 
         // Constructor
-        public StateMachine(TMachineUserData userData) {
-            this.m_UserData = userData;
+        public StateMachine() {
         }
         public void Dispose() {
             Assert.Operation.NotDisposed( $"StateMachine {this} must be alive", this.m_Lifecycle == Lifecycle.Alive );
             this.m_Lifecycle = Lifecycle.Disposing;
             {
-                this.OnDisposeCallback?.Invoke();
                 Assert.Operation.Valid( $"StateMachine {this} must have no {this.Root} root", this.Root == null || this.Root.IsDisposed );
             }
             this.m_Lifecycle = Lifecycle.Disposed;
         }
 
-        // Utils
-        public override string ToString() {
-            return this.UserData?.ToString() ?? base.ToString();
-        }
-
     }
-    public sealed partial class StateMachine<TMachineUserData, TStateUserData> {
+    public sealed partial class StateMachine {
 
         // SetRoot
-        public void SetRoot(IState<TMachineUserData, TStateUserData>? root, object? argument, Action<IState<TMachineUserData, TStateUserData>, object?>? callback = null) {
+        public void SetRoot(IState? root, object? argument, Action<IState, object?>? callback = null) {
             Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
             if (this.Root != null) {
                 this.RemoveRoot( this.Root, argument, callback );
@@ -101,7 +71,7 @@ namespace System.StateMachine.Pro {
         }
 
         // AddRoot
-        private void AddRoot(IState<TMachineUserData, TStateUserData> root, object? argument) {
+        private void AddRoot(IState root, object? argument) {
             Assert.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
             Assert.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
             Assert.Argument.Valid( $"Argument 'root' ({root}) must have no {root.Owner} owner", root.Owner == null );
@@ -112,7 +82,7 @@ namespace System.StateMachine.Pro {
         }
 
         // RemoveRoot
-        private void RemoveRoot(IState<TMachineUserData, TStateUserData> root, object? argument, Action<IState<TMachineUserData, TStateUserData>, object?>? callback = null) {
+        private void RemoveRoot(IState root, object? argument, Action<IState, object?>? callback = null) {
             Assert.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
             Assert.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
             Assert.Argument.Valid( $"Argument 'root' ({root}) must have {this} owner", root.Owner == this );

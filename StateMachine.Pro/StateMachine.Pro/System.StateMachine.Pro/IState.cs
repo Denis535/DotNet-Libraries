@@ -5,7 +5,7 @@ namespace System.StateMachine.Pro {
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
-    public partial interface IState<TMachineUserData, TStateUserData> : IDisposable {
+    public partial interface IState : IDisposable {
 
         // IsDisposed
         public bool IsDisposing { get; }
@@ -15,33 +15,30 @@ namespace System.StateMachine.Pro {
         public object? Owner { get; }
 
         // Machine
-        public IStateMachine<TMachineUserData, TStateUserData>? Machine { get; }
+        public IStateMachine? Machine { get; }
 
         // Root
         [MemberNotNullWhen( false, nameof( Parent ) )] public bool IsRoot { get; }
-        public IState<TMachineUserData, TStateUserData> Root { get; }
+        public IState Root { get; }
 
         // Parent
-        public IState<TMachineUserData, TStateUserData>? Parent { get; }
-        public IEnumerable<IState<TMachineUserData, TStateUserData>> Ancestors { get; }
-        public IEnumerable<IState<TMachineUserData, TStateUserData>> AncestorsAndSelf { get; }
+        public IState? Parent { get; }
+        public IEnumerable<IState> Ancestors { get; }
+        public IEnumerable<IState> AncestorsAndSelf { get; }
 
         // Activity
         public Activity Activity { get; }
 
-        // UserData
-        public TStateUserData UserData { get; }
-
     }
-    public partial interface IState<TMachineUserData, TStateUserData> {
+    public partial interface IState {
 
         // Attach
-        protected internal void Attach(IStateMachine<TMachineUserData, TStateUserData> machine, object? argument);
-        protected internal void Attach(IState<TMachineUserData, TStateUserData> parent, object? argument);
+        protected internal void Attach(IStateMachine machine, object? argument);
+        protected internal void Attach(IState parent, object? argument);
 
         // Detach
-        protected internal void Detach(IStateMachine<TMachineUserData, TStateUserData> machine, object? argument);
-        protected internal void Detach(IState<TMachineUserData, TStateUserData> parent, object? argument);
+        protected internal void Detach(IStateMachine machine, object? argument);
+        protected internal void Detach(IState parent, object? argument);
 
         // Activate
         protected internal void Activate(object? argument);
