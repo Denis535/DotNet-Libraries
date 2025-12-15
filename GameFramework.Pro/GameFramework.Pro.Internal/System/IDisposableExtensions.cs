@@ -4,7 +4,7 @@ namespace System {
     using System.Collections;
     using System.Collections.Generic;
 
-    public static class DisposableExtensions {
+    public static class IDisposableExtensions {
 
         public static void DisposeAll(this IEnumerable<IDisposable> disposables) {
             foreach (var disposable in disposables) {
