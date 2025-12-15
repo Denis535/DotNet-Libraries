@@ -18,21 +18,21 @@ namespace GameFramework.Pro {
         }
 
         protected override void OnActivate(object? argument) {
-            foreach (var ancestor in this.Ancestors.ToList().AsEnumerable().Reverse()) { // top-down
-                ancestor.Widget().OnBeforeDescendantActivate( this, argument );
+            foreach (var ancestor in this.Ancestors.Cast<Node>().ToList().AsEnumerable().Reverse()) { // top-down
+                ancestor.Widget.OnBeforeDescendantActivate( this, argument );
             }
             this.Widget.OnActivate( argument );
-            foreach (var ancestor in this.Ancestors.ToList()) { // down-top
-                ancestor.Widget().OnAfterDescendantActivate( this, argument );
+            foreach (var ancestor in this.Ancestors.Cast<Node>().ToList()) { // down-top
+                ancestor.Widget.OnAfterDescendantActivate( this, argument );
             }
         }
         protected override void OnDeactivate(object? argument) {
-            foreach (var ancestor in this.Ancestors.ToList().AsEnumerable().Reverse()) { // top-down
-                ancestor.Widget().OnBeforeDescendantDeactivate( this, argument );
+            foreach (var ancestor in this.Ancestors.Cast<Node>().ToList().AsEnumerable().Reverse()) { // top-down
+                ancestor.Widget.OnBeforeDescendantDeactivate( this, argument );
             }
             this.Widget.OnDeactivate( argument );
-            foreach (var ancestor in this.Ancestors.ToList()) { // down-top
-                ancestor.Widget().OnAfterDescendantDeactivate( this, argument );
+            foreach (var ancestor in this.Ancestors.Cast<Node>().ToList()) { // down-top
+                ancestor.Widget.OnAfterDescendantDeactivate( this, argument );
             }
         }
 
