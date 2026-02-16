@@ -5,11 +5,10 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class PlayerBase : DisposableBase {
-
         public PlayerBase() {
         }
+
         private protected override void OnDisposeInternal() {
         }
-
     }
 }

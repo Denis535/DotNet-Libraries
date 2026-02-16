@@ -1,23 +1,22 @@
-﻿#nullable enable
+#nullable enable
 namespace GameFramework.Pro {
     using System;
     using System.Collections.Generic;
     using System.Text;
 
-    public abstract class EntityBase2 : EntityBase {
-
+    public abstract class GameBase2 : GameBase {
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.NotDisposed( $"Entity {this} must be non-disposed", !this.IsDisposed );
+                Assert.Operation.NotDisposed($"Game {this} must be non-disposed", !this.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
 
-        public EntityBase2() {
+        public GameBase2() {
         }
+
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
-
     }
 }

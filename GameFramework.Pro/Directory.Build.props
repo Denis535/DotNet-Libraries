@@ -1,5 +1,5 @@
 <Project>
-    
+
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latest</LangVersion>
@@ -8,12 +8,12 @@
         <Title>$(AssemblyName)</Title>
         <Product>$(AssemblyName)</Product>
         <Version>1.11.1</Version>
-        <Description>The framework that allows you to design high-quality architecture of your game project.</Description>
+        <Description>The framework that helps you to design high-quality game architecture of your project.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
         <Copyright></Copyright>
         <RepositoryUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/GameFramework.Pro</RepositoryUrl>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
-    
+
 </Project>

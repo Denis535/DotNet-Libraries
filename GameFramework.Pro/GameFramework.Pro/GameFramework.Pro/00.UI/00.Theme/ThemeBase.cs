@@ -6,12 +6,11 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class ThemeBase : DisposableBase {
-
         private readonly StateMachine m_Machine;
 
         protected StateMachine Machine {
             get {
-                Assert.Operation.NotDisposed( $"Theme {this} must be non-disposed", !this.IsDisposed );
+                Assert.Operation.NotDisposed($"Theme {this} must be non-disposed", !this.IsDisposed);
                 return this.m_Machine;
             }
         }
@@ -19,9 +18,9 @@ namespace GameFramework.Pro {
         public ThemeBase() {
             this.m_Machine = new StateMachine();
         }
+
         private protected override void OnDisposeInternal() {
             this.Machine.Dispose();
         }
-
     }
 }

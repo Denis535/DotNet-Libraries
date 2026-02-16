@@ -15,16 +15,8 @@ namespace System {
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private CancellationTokenSource? m_DisposeCancellationTokenSource = null;
 
-        public bool IsDisposing {
-            get {
-                return this.m_Lifecycle == Lifecycle.Disposing;
-            }
-        }
-        public bool IsDisposed {
-            get {
-                return this.m_Lifecycle == Lifecycle.Disposed;
-            }
-        }
+        public bool IsDisposing => this.m_Lifecycle == Lifecycle.Disposing;
+        public bool IsDisposed => this.m_Lifecycle == Lifecycle.Disposed;
 
         public CancellationToken DisposeCancellationToken {
             get {
@@ -32,14 +24,16 @@ namespace System {
                     this.m_DisposeCancellationTokenSource = new CancellationTokenSource();
                     if (this.IsDisposed) this.m_DisposeCancellationTokenSource.Cancel();
                 }
+
                 return this.m_DisposeCancellationTokenSource.Token;
             }
         }
 
         public DisposableBase() {
         }
+
         public void Dispose() {
-            Assert.Operation.NotDisposed( $"Disposable {this} must be alive", this.m_Lifecycle == Lifecycle.Alive );
+            Assert.Operation.NotDisposed($"Disposable {this} must be alive", this.m_Lifecycle == Lifecycle.Alive);
             this.m_Lifecycle = Lifecycle.Disposing;
             {
                 this.OnDispose();
@@ -48,8 +42,8 @@ namespace System {
             }
             this.m_Lifecycle = Lifecycle.Disposed;
         }
+
         protected abstract void OnDispose();
         private protected abstract void OnDisposeInternal();
-
     }
 }

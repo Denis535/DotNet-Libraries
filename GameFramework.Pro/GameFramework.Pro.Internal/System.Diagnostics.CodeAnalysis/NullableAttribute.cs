@@ -66,26 +66,31 @@ namespace System.Diagnostics.CodeAnalysis {
     //}
 
     // MemberNotNull
-    [EditorBrowsable( EditorBrowsableState.Never )]
-    [AttributeUsage( AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true )]
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
     internal sealed class MemberNotNullAttribute : Attribute {
         public string[] Members { get; }
+
         public MemberNotNullAttribute(string member) {
             this.Members = new[] { member };
         }
+
         public MemberNotNullAttribute(params string[] members) {
             this.Members = members;
         }
     }
-    [EditorBrowsable( EditorBrowsableState.Never )]
-    [AttributeUsage( AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true )]
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
     internal sealed class MemberNotNullWhenAttribute : Attribute {
         public bool ReturnValue { get; }
         public string[] Members { get; }
+
         public MemberNotNullWhenAttribute(bool returnValue, string member) {
             this.ReturnValue = returnValue;
             this.Members = new[] { member };
         }
+
         public MemberNotNullWhenAttribute(bool returnValue, params string[] members) {
             this.ReturnValue = returnValue;
             this.Members = members;

@@ -5,11 +5,10 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class EntityBase : DisposableBase {
-
         public EntityBase() {
         }
+
         private protected override void OnDisposeInternal() {
         }
-
     }
 }

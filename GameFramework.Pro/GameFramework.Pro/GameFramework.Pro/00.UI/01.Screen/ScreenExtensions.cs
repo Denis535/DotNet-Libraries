@@ -6,13 +6,12 @@ namespace GameFramework.Pro {
     using System.TreeMachine.Pro;
 
     public static class ScreenExtensions {
-
         public static WidgetBase Widget(this INode node) {
-            return ((Node) node).Widget;
-        }
-        public static T Widget<T>(this INode node) where T : notnull, WidgetBase {
-            return (T) node.Widget();
+            return ((WidgetBase.Node2)node).Widget;
         }
 
+        public static T Widget<T>(this INode node) where T : notnull, WidgetBase {
+            return (T)node.Widget();
+        }
     }
 }

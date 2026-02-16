@@ -5,10 +5,9 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class WidgetBase2 : WidgetBase {
-
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.NotDisposed( $"Widget {this} must be non-disposed", !this.IsDisposed );
+                Assert.Operation.NotDisposed($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
@@ -16,13 +15,16 @@ namespace GameFramework.Pro {
         public WidgetBase2() {
         }
 
+        private protected override void OnDisposeInternal() {
+            base.OnDisposeInternal();
+        }
     }
+
     public abstract class ViewableWidgetBase2<TView> : ViewableWidgetBase<TView>
         where TView : notnull {
-
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.NotDisposed( $"Widget {this} must be non-disposed", !this.IsDisposed );
+                Assert.Operation.NotDisposed($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
@@ -30,5 +32,8 @@ namespace GameFramework.Pro {
         public ViewableWidgetBase2() {
         }
 
+        private protected override void OnDisposeInternal() {
+            base.OnDisposeInternal();
+        }
     }
 }

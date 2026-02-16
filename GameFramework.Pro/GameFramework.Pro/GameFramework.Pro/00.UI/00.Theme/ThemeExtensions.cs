@@ -6,13 +6,12 @@ namespace GameFramework.Pro {
     using System.StateMachine.Pro;
 
     public static class ThemeExtensions {
-
         public static PlayListBase PlayList(this IState state) {
-            return ((State) state).PlayList;
-        }
-        public static T PlayList<T>(this IState state) where T : notnull, PlayListBase {
-            return (T) state.PlayList();
+            return ((PlayListBase.State2)state).PlayList;
         }
 
+        public static T PlayList<T>(this IState state) where T : notnull, PlayListBase {
+            return (T)state.PlayList();
+        }
     }
 }

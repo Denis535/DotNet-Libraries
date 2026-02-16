@@ -5,10 +5,9 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class PlayListBase2 : PlayListBase {
-
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.Valid( $"PlayList {this} must be non-disposed", !this.IsDisposed );
+                Assert.Operation.Valid($"PlayList {this} must be non-disposed", !this.State.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
@@ -16,5 +15,8 @@ namespace GameFramework.Pro {
         public PlayListBase2() {
         }
 
+        private protected override void OnDisposeInternal() {
+            base.OnDisposeInternal();
+        }
     }
 }

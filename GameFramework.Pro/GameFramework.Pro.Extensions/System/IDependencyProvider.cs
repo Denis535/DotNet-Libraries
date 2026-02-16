@@ -6,46 +6,45 @@ namespace System {
     using System.Text;
 
     public interface IDependencyProvider {
-
         private static IDependencyProvider? m_Instance;
 
         [AllowNull]
         internal static IDependencyProvider Instance {
-            get {
-                return m_Instance ?? throw new Exception( "Instance must be non-null" );
-            }
+            get { return m_Instance ?? throw new Exception("Instance must be non-null"); }
             set {
                 if (value != null) {
-                    Assert.Operation.Valid( $"Instance {m_Instance} must be null", m_Instance == null );
+                    Assert.Operation.Valid($"Instance {m_Instance} must be null", m_Instance == null);
                     m_Instance = value;
-                } else {
-                    Assert.Operation.Valid( $"Instance must be non-null", m_Instance != null );
+                }
+                else {
+                    Assert.Operation.Valid($"Instance must be non-null", m_Instance != null);
                     m_Instance = null;
                 }
             }
         }
 
         public sealed T? GetDependency<T>(object? argument = null) where T : notnull {
-            var value = this.GetValue( typeof( T ), argument );
-            return (T?) value;
+            var value = this.GetValue(typeof(T), argument);
+            return (T?)value;
         }
+
         public sealed T? GetDependency<T>(Type type, object? argument = null) where T : notnull {
-            var value = this.GetValue( type, argument );
-            return (T?) value;
+            var value = this.GetValue(type, argument);
+            return (T?)value;
         }
 
         public sealed T RequireDependency<T>(object? argument = null) where T : notnull {
-            var value = this.GetValue( typeof( T ), argument );
-            Assert.Operation.Valid( $"Dependency {typeof( T )} ({argument ?? "Null"}) was not found", value != null );
-            return (T) value;
+            var value = this.GetValue(typeof(T), argument);
+            Assert.Operation.Valid($"Dependency {typeof(T)} ({argument ?? "Null"}) was not found", value != null);
+            return (T)value;
         }
+
         public sealed T RequireDependency<T>(Type type, object? argument = null) where T : notnull {
-            var value = this.GetValue( type, argument );
-            Assert.Operation.Valid( $"Dependency {type} ({argument ?? "Null"}) was not found", value != null );
-            return (T) value;
+            var value = this.GetValue(type, argument);
+            Assert.Operation.Valid($"Dependency {type} ({argument ?? "Null"}) was not found", value != null);
+            return (T)value;
         }
 
         protected object? GetValue(Type type, object? argument);
-
     }
 }
