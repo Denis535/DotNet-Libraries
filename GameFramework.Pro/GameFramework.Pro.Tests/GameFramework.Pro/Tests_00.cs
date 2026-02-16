@@ -23,10 +23,6 @@ namespace GameFramework.Pro {
         }
 
         protected override void OnDispose() {
-            this.Theme.Dispose();
-            this.Screen.Dispose();
-            this.Router.Dispose();
-            this.Application.Dispose();
         }
     }
 
@@ -162,7 +158,7 @@ namespace GameFramework.Pro {
         }
     }
 
-    // Domain
+    // Game
     internal class Game : GameBase2 {
         private Player Player { get; init; }
         private Entity Entity { get; init; }
