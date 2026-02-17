@@ -108,8 +108,8 @@ namespace GameFramework.Pro {
         }
 
         private protected override void OnDisposeInternal() {
-            if (this.m_View is IDisposable disposable) {
-                disposable.Dispose();
+            if (this.View is IDisposable view) {
+                view.Dispose();
             }
         }
     }
