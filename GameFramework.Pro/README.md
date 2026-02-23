@@ -50,3 +50,4 @@ The framework that helps you to design high-quality game architecture of your pr
 - https://github.com/Denis535/DotNet.Libraries/tree/main/GameFramework.Pro
 - https://nuget.org/packages/GameFramework.Pro
 - https://medium.com/@Denis535/best-practices-for-software-architecture-design-bf21ba790b1a
+- https://medium.com/@Denis535/gameframework-pro-kotlin-17117e46459c
