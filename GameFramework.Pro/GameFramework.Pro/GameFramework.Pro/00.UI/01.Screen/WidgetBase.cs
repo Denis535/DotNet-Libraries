@@ -12,7 +12,7 @@ namespace GameFramework.Pro {
 
             public WidgetBase Widget {
                 get {
-                    Assert.Operation.Valid($"Node {this} must be non-disposed", !this.IsDisposed);
+                    Check.Operation.Valid($"Node {this} must be non-disposed", !this.IsDisposed);
                     return this.m_Widget;
                 }
             }
@@ -95,11 +95,11 @@ namespace GameFramework.Pro {
 
         public object View {
             get {
-                Assert.Operation.Valid($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
+                Check.Operation.Valid($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
                 return this.m_View;
             }
             protected init {
-                Assert.Operation.Valid($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
+                Check.Operation.Valid($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
                 this.m_View = value ?? throw new ArgumentNullException(nameof(value));
             }
         }

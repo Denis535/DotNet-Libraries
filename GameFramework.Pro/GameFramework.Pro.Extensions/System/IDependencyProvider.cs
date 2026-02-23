@@ -13,11 +13,11 @@ namespace System {
             get { return m_Instance ?? throw new Exception("Instance must be non-null"); }
             set {
                 if (value != null) {
-                    Assert.Operation.Valid($"Instance {m_Instance} must be null", m_Instance == null);
+                    Check.Operation.Valid($"Instance {m_Instance} must be null", m_Instance == null);
                     m_Instance = value;
                 }
                 else {
-                    Assert.Operation.Valid($"Instance must be non-null", m_Instance != null);
+                    Check.Operation.Valid($"Instance must be non-null", m_Instance != null);
                     m_Instance = null;
                 }
             }
@@ -35,13 +35,13 @@ namespace System {
 
         public sealed T RequireDependency<T>(object? argument = null) where T : notnull {
             var value = this.GetValue(typeof(T), argument);
-            Assert.Operation.Valid($"Dependency {typeof(T)} ({argument ?? "Null"}) was not found", value != null);
+            Check.Operation.Valid($"Dependency {typeof(T)} ({argument ?? "Null"}) was not found", value != null);
             return (T)value;
         }
 
         public sealed T RequireDependency<T>(Type type, object? argument = null) where T : notnull {
             var value = this.GetValue(type, argument);
-            Assert.Operation.Valid($"Dependency {type} ({argument ?? "Null"}) was not found", value != null);
+            Check.Operation.Valid($"Dependency {type} ({argument ?? "Null"}) was not found", value != null);
             return (T)value;
         }
 

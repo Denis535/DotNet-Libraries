@@ -7,7 +7,7 @@ namespace GameFramework.Pro {
     public abstract class ApplicationBase2 : ApplicationBase {
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.NotDisposed($"Application {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.NotDisposed($"Application {this} must be non-disposed", !this.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }

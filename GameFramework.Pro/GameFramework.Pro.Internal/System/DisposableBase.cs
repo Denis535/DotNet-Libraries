@@ -33,7 +33,7 @@ namespace System {
         }
 
         public void Dispose() {
-            Assert.Operation.NotDisposed($"Disposable {this} must be alive", this.m_Lifecycle == Lifecycle.Alive);
+            Check.Operation.NotDisposed($"Disposable {this} must be alive", this.m_Lifecycle == Lifecycle.Alive);
             this.m_Lifecycle = Lifecycle.Disposing;
             {
                 this.OnDispose();

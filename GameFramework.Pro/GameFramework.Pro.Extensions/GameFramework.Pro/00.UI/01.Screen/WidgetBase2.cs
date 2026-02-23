@@ -7,7 +7,7 @@ namespace GameFramework.Pro {
     public abstract class WidgetBase2 : WidgetBase {
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.NotDisposed($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
+                Check.Operation.NotDisposed($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
@@ -24,7 +24,7 @@ namespace GameFramework.Pro {
         where TView : notnull {
         protected IDependencyProvider Provider {
             get {
-                Assert.Operation.NotDisposed($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
+                Check.Operation.NotDisposed($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }

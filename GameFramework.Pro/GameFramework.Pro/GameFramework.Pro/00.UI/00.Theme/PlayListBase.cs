@@ -11,7 +11,7 @@ namespace GameFramework.Pro {
 
             public PlayListBase PlayList {
                 get {
-                    Assert.Operation.Valid($"State {this} must be non-disposed", !this.IsDisposed);
+                    Check.Operation.Valid($"State {this} must be non-disposed", !this.IsDisposed);
                     return this.m_PlayList;
                 }
             }

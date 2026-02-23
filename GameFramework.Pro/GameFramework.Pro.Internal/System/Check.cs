@@ -5,7 +5,7 @@ namespace System {
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
-    internal static class Assert {
+    internal static class Check {
         public static class Argument {
             public static void Valid(FormattableString message, [DoesNotReturnIf(false)] bool condition) {
                 if (!condition) throw new ArgumentException(message: message.ToString());
