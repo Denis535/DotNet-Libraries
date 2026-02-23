@@ -28,7 +28,7 @@ namespace GameFramework.Pro {
 
     // UI
     internal class Theme : ThemeBase2<Router, Application> {
-        public Theme() : base() {
+        public Theme() {
             this.Machine.SetRoot(new MainPlayList().State, null, null);
             this.Machine.SetRoot(new GamePlayList().State, null, null);
         }
@@ -39,7 +39,7 @@ namespace GameFramework.Pro {
     }
 
     internal class MainPlayList : PlayListBase2 {
-        public MainPlayList() : base() {
+        public MainPlayList() {
         }
 
         protected internal override void OnDispose() {
@@ -53,7 +53,7 @@ namespace GameFramework.Pro {
     }
 
     internal class GamePlayList : PlayListBase2 {
-        public GamePlayList() : base() {
+        public GamePlayList() {
         }
 
         protected internal override void OnDispose() {
@@ -68,7 +68,7 @@ namespace GameFramework.Pro {
 
     // UI
     internal class Screen : ScreenBase2<Router, Application> {
-        public Screen() : base() {
+        public Screen() {
             this.Machine.SetRoot(new RootWidget().Node, null, null);
         }
 
@@ -78,7 +78,7 @@ namespace GameFramework.Pro {
     }
 
     internal class RootWidget : WidgetBase2 {
-        public RootWidget() : base() {
+        public RootWidget() {
             this.NodeMutable.AddChild(new MainWidget().Node, null);
             this.NodeMutable.AddChild(new GameWidget().Node, null);
         }
@@ -95,12 +95,12 @@ namespace GameFramework.Pro {
     }
 
     internal class MainWidget : ViewableWidgetBase2<MainWidget.View> {
-        new internal class View {
+        internal new class View {
             public View() {
             }
         }
 
-        public MainWidget() : base() {
+        public MainWidget() {
             base.View = new View();
         }
 
@@ -116,12 +116,12 @@ namespace GameFramework.Pro {
     }
 
     internal class GameWidget : ViewableWidgetBase2<GameWidget.View> {
-        new internal class View {
+        internal new class View {
             public View() {
             }
         }
 
-        public GameWidget() : base() {
+        public GameWidget() {
             base.View = new View();
         }
 
@@ -138,7 +138,7 @@ namespace GameFramework.Pro {
 
     // UI
     internal class Router : RouterBase2<Theme, Screen, Application> {
-        public Router() : base() {
+        public Router() {
         }
 
         protected override void OnDispose() {
@@ -149,7 +149,7 @@ namespace GameFramework.Pro {
     internal class Application : ApplicationBase2 {
         private Game Game { get; init; }
 
-        public Application() : base() {
+        public Application() {
             this.Game = new Game();
         }
 
@@ -163,7 +163,7 @@ namespace GameFramework.Pro {
         private Player Player { get; init; }
         private Entity Entity { get; init; }
 
-        public Game() : base() {
+        public Game() {
             this.Player = new Player();
             this.Entity = new Entity();
         }
@@ -175,7 +175,7 @@ namespace GameFramework.Pro {
     }
 
     internal class Player : PlayerBase2 {
-        public Player() : base() {
+        public Player() {
         }
 
         protected override void OnDispose() {

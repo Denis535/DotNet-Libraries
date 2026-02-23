@@ -1,2 +1,7 @@
 <Project>
+
+    <PropertyGroup>
+        <RootNamespace />
+    </PropertyGroup>
+
 </Project>

@@ -91,7 +91,7 @@ namespace GameFramework.Pro {
     }
 
     public abstract class ViewableWidgetBase : WidgetBase {
-        private object m_View = default!;
+        private readonly object m_View = default!;
 
         public object View {
             get {
@@ -122,6 +122,10 @@ namespace GameFramework.Pro {
         }
 
         public ViewableWidgetBase() {
+        }
+
+        private protected override void OnDisposeInternal() {
+            base.OnDisposeInternal();
         }
     }
 }
