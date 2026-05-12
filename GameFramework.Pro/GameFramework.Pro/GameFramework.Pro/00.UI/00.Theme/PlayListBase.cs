@@ -6,7 +6,11 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class PlayListBase {
-        internal sealed class State2 : State {
+        public interface IState2 : IState {
+            public PlayListBase PlayList { get; }
+        }
+
+        public sealed class State2 : State, IState2 {
             private readonly PlayListBase m_PlayList;
 
             public PlayListBase PlayList {
@@ -34,10 +38,10 @@ namespace GameFramework.Pro {
             }
         }
 
-        private readonly State m_State;
+        private readonly State2 m_State;
 
-        public IState State => this.m_State;
-        protected State StateMutable => this.m_State;
+        public IState2 State => this.m_State;
+        protected State2 StateMutable => this.m_State;
 
         public PlayListBase() {
             this.m_State = new State2(this);
