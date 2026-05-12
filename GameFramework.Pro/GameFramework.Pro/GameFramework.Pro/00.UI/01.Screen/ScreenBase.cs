@@ -10,7 +10,7 @@ namespace GameFramework.Pro {
 
         protected TreeMachine Machine {
             get {
-                Check.Operation.NotDisposed($"Screen {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Screen {this} must be alive", !this.IsDisposed);
                 return this.m_Machine;
             }
         }

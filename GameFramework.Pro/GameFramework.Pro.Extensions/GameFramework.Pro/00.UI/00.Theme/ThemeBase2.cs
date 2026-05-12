@@ -12,21 +12,21 @@ namespace GameFramework.Pro {
 
         protected IDependencyProvider Provider {
             get {
-                Check.Operation.NotDisposed($"Theme {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Theme {this} must be alive", !this.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
 
         protected TRouter Router {
             get {
-                Check.Operation.NotDisposed($"Theme {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Theme {this} must be alive", !this.IsDisposed);
                 return this.m_Router;
             }
         }
 
         protected TApplication Application {
             get {
-                Check.Operation.NotDisposed($"Theme {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Theme {this} must be alive", !this.IsDisposed);
                 return this.m_Application;
             }
         }

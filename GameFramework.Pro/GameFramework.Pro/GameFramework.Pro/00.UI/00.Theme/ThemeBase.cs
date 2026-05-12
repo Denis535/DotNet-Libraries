@@ -10,7 +10,7 @@ namespace GameFramework.Pro {
 
         protected StateMachine Machine {
             get {
-                Check.Operation.NotDisposed($"Theme {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Theme {this} must be alive", !this.IsDisposed);
                 return this.m_Machine;
             }
         }

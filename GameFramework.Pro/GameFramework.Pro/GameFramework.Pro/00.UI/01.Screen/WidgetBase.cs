@@ -12,7 +12,7 @@ namespace GameFramework.Pro {
 
             public WidgetBase Widget {
                 get {
-                    Check.Operation.Valid($"Node {this} must be non-disposed", !this.IsDisposed);
+                    Check.Operation.Alive($"Node {this} must be alive", !this.IsDisposed);
                     return this.m_Widget;
                 }
             }
@@ -27,27 +27,25 @@ namespace GameFramework.Pro {
             }
 
             protected override void OnActivate(object? argument) {
+                // top-down
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
-                    // top-down
                     ancestor.Widget.OnBeforeDescendantActivate(this, argument);
                 }
-
                 this.Widget.OnActivate(argument);
+                // down-top
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList()) {
-                    // down-top
                     ancestor.Widget.OnAfterDescendantActivate(this, argument);
                 }
             }
 
             protected override void OnDeactivate(object? argument) {
+                // top-down
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
-                    // top-down
                     ancestor.Widget.OnBeforeDescendantDeactivate(this, argument);
                 }
-
                 this.Widget.OnDeactivate(argument);
+                // down-top
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList()) {
-                    // down-top
                     ancestor.Widget.OnAfterDescendantDeactivate(this, argument);
                 }
             }
@@ -95,11 +93,11 @@ namespace GameFramework.Pro {
 
         public object View {
             get {
-                Check.Operation.Valid($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
+                Check.Operation.Alive($"Widget {this} must be alive", !this.Node.IsDisposed);
                 return this.m_View;
             }
             protected init {
-                Check.Operation.Valid($"Widget {this} must be non-disposed", !this.Node.IsDisposed);
+                Check.Operation.Alive($"Widget {this} must be alive", !this.Node.IsDisposed);
                 this.m_View = value ?? throw new ArgumentNullException(nameof(value));
             }
         }

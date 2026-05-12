@@ -7,7 +7,7 @@ namespace GameFramework.Pro {
     public abstract class PlayListBase2 : PlayListBase {
         protected IDependencyProvider Provider {
             get {
-                Check.Operation.Valid($"PlayList {this} must be non-disposed", !this.State.IsDisposed);
+                Check.Operation.Alive($"PlayList {this} must be alive", !this.State.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }

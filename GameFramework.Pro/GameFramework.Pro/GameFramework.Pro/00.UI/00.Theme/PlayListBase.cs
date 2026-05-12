@@ -11,7 +11,7 @@ namespace GameFramework.Pro {
 
             public PlayListBase PlayList {
                 get {
-                    Check.Operation.Valid($"State {this} must be non-disposed", !this.IsDisposed);
+                    Check.Operation.Alive($"State {this} must be alive", !this.IsDisposed);
                     return this.m_PlayList;
                 }
             }

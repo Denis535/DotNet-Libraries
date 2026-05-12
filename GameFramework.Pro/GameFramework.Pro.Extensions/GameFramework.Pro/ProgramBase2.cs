@@ -16,48 +16,48 @@ namespace GameFramework.Pro {
 
         protected TTheme Theme {
             get {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 Check.Operation.Valid($"Theme must be non-null", this.m_Theme != null);
                 return this.m_Theme;
             }
             init {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 this.m_Theme = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
         protected TScreen Screen {
             get {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 Check.Operation.Valid($"Screen must be non-null", this.m_Screen != null);
                 return this.m_Screen;
             }
             init {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 this.m_Screen = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
         protected TRouter Router {
             get {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 Check.Operation.Valid($"Router must be non-null", this.m_Router != null);
                 return this.m_Router;
             }
             init {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 this.m_Router = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
         protected TApplication Application {
             get {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 Check.Operation.Valid($"Application must be non-null", this.m_Application != null);
                 return this.m_Application;
             }
             init {
-                Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
                 this.m_Application = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
@@ -76,7 +76,7 @@ namespace GameFramework.Pro {
         }
 
         object? IDependencyProvider.GetValue(Type type, object? argument) {
-            Check.Operation.NotDisposed($"Program {this} must be non-disposed", !this.IsDisposed);
+            Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
             return this.GetValue(type, argument);
         }
 
@@ -97,7 +97,7 @@ namespace GameFramework.Pro {
                 return this.Application;
             }
 
-            return default;
+            return null;
         }
     }
 }

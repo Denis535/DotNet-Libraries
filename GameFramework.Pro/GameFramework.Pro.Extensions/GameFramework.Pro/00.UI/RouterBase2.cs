@@ -12,7 +12,7 @@ namespace GameFramework.Pro {
 
         protected IDependencyProvider Provider {
             get {
-                Check.Operation.NotDisposed($"Router {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Router {this} must be alive", !this.IsDisposed);
                 return IDependencyProvider.Instance;
             }
         }
@@ -22,7 +22,7 @@ namespace GameFramework.Pro {
 
         protected TApplication Application {
             get {
-                Check.Operation.NotDisposed($"Router {this} must be non-disposed", !this.IsDisposed);
+                Check.Operation.Alive($"Router {this} must be alive", !this.IsDisposed);
                 return this.m_Application;
             }
         }
