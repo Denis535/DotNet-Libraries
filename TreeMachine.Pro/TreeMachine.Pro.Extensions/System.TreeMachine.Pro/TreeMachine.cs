@@ -4,7 +4,7 @@ namespace System.TreeMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public sealed partial class TreeMachine : ITreeMachine, IDisposable {
+    public sealed partial class TreeMachine : ITreeMachine {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private INode? m_Root = null;
@@ -93,7 +93,7 @@ namespace System.TreeMachine.Pro {
             if (callback != null) {
                 callback.Invoke( root, argument );
             } else {
-                ((IDisposable) root).Dispose();
+                root.Dispose();
             }
         }
 

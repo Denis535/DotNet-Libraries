@@ -6,7 +6,7 @@ namespace System.TreeMachine.Pro {
     using System.Linq;
     using System.Text;
 
-    public partial class Node : INode, IDisposable {
+    public partial class Node : INode {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private object? m_Owner = null;
@@ -275,7 +275,7 @@ namespace System.TreeMachine.Pro {
             if (callback != null) {
                 callback.Invoke( child, argument );
             } else {
-                ((IDisposable) child).Dispose();
+                child.Dispose();
             }
         }
         public int RemoveChildren(Func<INode, bool> predicate, object? argument, Action<INode, object?>? callback = null) {
