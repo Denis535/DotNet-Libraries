@@ -7,12 +7,12 @@
         <RootNamespace />
         <Title>$(AssemblyName)</Title>
         <Product>$(AssemblyName)</Product>
-        <Version>6.0.0</Version>
+        <Version>6.0.1</Version>
         <Description>The library that allows you to easily implement a hierarchical object.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
         <Copyright></Copyright>
-        <RepositoryUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/TreeMachine.Pro</RepositoryUrl>
+        <RepositoryUrl>https://github.com/Denis535/DotNet-Libraries/tree/main/TreeMachine.Pro</RepositoryUrl>
 
         <IsPackable>true</IsPackable>
         <IsTool>false</IsTool>
@@ -22,7 +22,7 @@
         <PackageVersion>$(Version)</PackageVersion>
         <PackageDescription>$(Description)</PackageDescription>
         <PackageTags>tree-machine tree hierarchy hierarchical node pattern design-pattern</PackageTags>
-        <PackageProjectUrl>https://github.com/Denis535/DotNet.Libraries/tree/main/TreeMachine.Pro</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/Denis535/DotNet-Libraries/tree/main/TreeMachine.Pro</PackageProjectUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageLicenseUrl></PackageLicenseUrl>
         <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
