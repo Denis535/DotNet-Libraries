@@ -27,15 +27,15 @@ namespace System.StateMachine.Pro {
         // Root
         public IState? Root {
             get {
-                Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
+                Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Root;
             }
             private set {
-                Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
+                Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
                 if (value != null) {
-                    Assert.Operation.Valid( $"StateMachine {this} must have no {this.m_Root} root", this.m_Root == null );
+                    Check.Operation.Valid( $"StateMachine {this} must have no {this.m_Root} root", this.m_Root == null );
                 } else {
-                    Assert.Operation.Valid( $"StateMachine {this} must have root", this.m_Root != null );
+                    Check.Operation.Valid( $"StateMachine {this} must have root", this.m_Root != null );
                 }
                 this.m_Root = value;
             }
@@ -48,10 +48,10 @@ namespace System.StateMachine.Pro {
         public StateMachine() {
         }
         public void Dispose() {
-            Assert.Operation.NotDisposed( $"StateMachine {this} must be alive", this.m_Lifecycle == Lifecycle.Alive );
+            Check.Operation.Alive( $"StateMachine {this} must be alive", this.m_Lifecycle == Lifecycle.Alive );
             this.m_Lifecycle = Lifecycle.Disposing;
             {
-                Assert.Operation.Valid( $"StateMachine {this} must have no {this.Root} root", this.Root == null || this.Root.IsDisposed );
+                Check.Operation.Valid( $"StateMachine {this} must have no {this.Root} root", this.Root == null || this.Root.IsDisposed );
             }
             this.m_Lifecycle = Lifecycle.Disposed;
         }
@@ -61,7 +61,7 @@ namespace System.StateMachine.Pro {
 
         // SetRoot
         public void SetRoot(IState? root, object? argument, Action<IState, object?>? callback = null) {
-            Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
+            Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
             if (this.Root != null) {
                 this.RemoveRoot( this.Root, argument, callback );
             }
@@ -72,22 +72,22 @@ namespace System.StateMachine.Pro {
 
         // AddRoot
         private void AddRoot(IState root, object? argument) {
-            Assert.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
-            Assert.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
-            Assert.Argument.Valid( $"Argument 'root' ({root}) must have no {root.Owner} owner", root.Owner == null );
-            Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
-            Assert.Operation.Valid( $"StateMachine {this} must have no {this.Root} root", this.Root == null );
+            Check.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
+            Check.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
+            Check.Argument.Valid( $"Argument 'root' ({root}) must have no {root.Owner} owner", root.Owner == null );
+            Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
+            Check.Operation.Valid( $"StateMachine {this} must have no {this.Root} root", this.Root == null );
             this.Root = root;
             this.Root.Attach( this, argument );
         }
 
         // RemoveRoot
         private void RemoveRoot(IState root, object? argument, Action<IState, object?>? callback = null) {
-            Assert.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
-            Assert.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
-            Assert.Argument.Valid( $"Argument 'root' ({root}) must have {this} owner", root.Owner == this );
-            Assert.Operation.NotDisposed( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
-            Assert.Operation.Valid( $"StateMachine {this} must have {root} root", this.Root == root );
+            Check.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
+            Check.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
+            Check.Argument.Valid( $"Argument 'root' ({root}) must have {this} owner", root.Owner == this );
+            Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
+            Check.Operation.Valid( $"StateMachine {this} must have {root} root", this.Root == root );
             this.Root.Detach( this, argument );
             this.Root = null;
             if (callback != null) {
