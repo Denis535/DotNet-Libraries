@@ -4,7 +4,7 @@ namespace System.StateMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public interface IStateMachine {
+    public interface IStateMachine : IDisposable {
 
         // IsDisposed
         public bool IsDisposing { get; }

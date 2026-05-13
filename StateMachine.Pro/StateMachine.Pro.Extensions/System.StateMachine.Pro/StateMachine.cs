@@ -4,7 +4,7 @@ namespace System.StateMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public sealed partial class StateMachine : IStateMachine, IDisposable {
+    public sealed partial class StateMachine : IStateMachine {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private IState? m_Root = null;
@@ -93,7 +93,7 @@ namespace System.StateMachine.Pro {
             if (callback != null) {
                 callback.Invoke( root, argument );
             } else {
-                ((IDisposable) root).Dispose();
+                root.Dispose();
             }
         }
 

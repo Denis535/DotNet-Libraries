@@ -6,7 +6,7 @@ namespace System.StateMachine.Pro {
     using System.Linq;
     using System.Text;
 
-    public partial class State : IState, IDisposable {
+    public partial class State : IState {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private object? m_Owner = null;

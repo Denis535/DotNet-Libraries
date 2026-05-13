@@ -6,7 +6,7 @@ namespace System.StateMachine.Pro {
     using System.Linq;
     using System.Text;
 
-    public partial class ChildrenableState : IState, IDisposable {
+    public partial class ChildrenableState : IState {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private object? m_Owner = null;
@@ -260,7 +260,7 @@ namespace System.StateMachine.Pro {
             if (callback != null) {
                 callback.Invoke( child, argument );
             } else {
-                ((IDisposable) child).Dispose();
+                child.Dispose();
             }
         }
         public int RemoveChildren(Func<IState, bool> predicate, object? argument, Action<IState, object?>? callback = null) {
