@@ -6,8 +6,9 @@ The framework that guides you to design a high-quality architecture for your gam
 
 ###### System
 
-- IDependencyProvider
+- Check
 - DisposableBase
+- IDependencyProvider
 
 ###### GameFramework.Pro
 
