@@ -7,11 +7,7 @@ namespace GameFramework.Pro {
     using System.TreeMachine.Pro;
 
     public abstract class WidgetBase {
-        public interface INode2 : INode {
-            public WidgetBase Widget { get; }
-        }
-
-        public sealed class Node2 : Node, INode2 {
+        public sealed class Node2 : Node {
             private readonly WidgetBase m_Widget;
 
             public WidgetBase Widget {
@@ -61,8 +57,7 @@ namespace GameFramework.Pro {
 
         private readonly Node2 m_Node;
 
-        public INode2 Node => this.m_Node;
-        protected Node2 NodeMutable => this.m_Node;
+        public Node2 Node => this.m_Node;
 
         public WidgetBase() {
             this.m_Node = new Node2(this);

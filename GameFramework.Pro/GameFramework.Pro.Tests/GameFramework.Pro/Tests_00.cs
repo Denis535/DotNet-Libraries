@@ -34,7 +34,7 @@ namespace GameFramework.Pro {
         }
 
         protected override void OnDispose() {
-            ((IDisposable?)this.Machine.Root)!.Dispose();
+            this.Machine.Root!.Dispose();
         }
     }
 
@@ -73,18 +73,18 @@ namespace GameFramework.Pro {
         }
 
         protected override void OnDispose() {
-            ((IDisposable?)this.Machine.Root)!.Dispose();
+            this.Machine.Root!.Dispose();
         }
     }
 
     internal class RootWidget : WidgetBase2 {
         public RootWidget() {
-            this.NodeMutable.AddChild(new MainWidget().Node, null);
-            this.NodeMutable.AddChild(new GameWidget().Node, null);
+            this.Node.AddChild(new MainWidget().Node, null);
+            this.Node.AddChild(new GameWidget().Node, null);
         }
 
         protected internal override void OnDispose() {
-            this.NodeMutable.Children.Cast<IDisposable>().Reverse().DisposeAll();
+            this.Node.Children.Reverse().DisposeAll();
         }
 
         protected internal override void OnActivate(object? argument) {
@@ -105,7 +105,7 @@ namespace GameFramework.Pro {
         }
 
         protected internal override void OnDispose() {
-            this.NodeMutable.Children.Cast<IDisposable>().Reverse().DisposeAll();
+            this.Node.Children.Reverse().DisposeAll();
         }
 
         protected internal override void OnActivate(object? argument) {
@@ -126,7 +126,7 @@ namespace GameFramework.Pro {
         }
 
         protected internal override void OnDispose() {
-            this.NodeMutable.Children.Cast<IDisposable>().Reverse().DisposeAll();
+            this.Node.Children.Reverse().DisposeAll();
         }
 
         protected internal override void OnActivate(object? argument) {
