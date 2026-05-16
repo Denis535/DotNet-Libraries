@@ -101,7 +101,7 @@ namespace GameFramework.Pro {
             }
         }
 
-        public ViewableWidgetBase() {
+        internal ViewableWidgetBase() {
         }
 
         private protected override void OnDisposeInternal() {
