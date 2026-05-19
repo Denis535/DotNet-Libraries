@@ -79,7 +79,6 @@ namespace GameFramework.Pro {
             Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
             return this.GetValue(type, argument);
         }
-
         protected virtual object? GetValue(Type type, object? argument) {
             if (type.IsAssignableFrom(typeof(TTheme))) {
                 return this.Theme;
