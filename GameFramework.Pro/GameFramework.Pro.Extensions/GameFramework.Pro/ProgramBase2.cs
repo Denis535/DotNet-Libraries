@@ -9,6 +9,7 @@ namespace GameFramework.Pro {
         where TScreen : ScreenBase
         where TRouter : RouterBase
         where TApplication : ApplicationBase {
+        
         private readonly TTheme m_Theme = default!;
         private readonly TScreen m_Screen = default!;
         private readonly TRouter m_Router = default!;
@@ -65,7 +66,6 @@ namespace GameFramework.Pro {
         public ProgramBase2() {
             IDependencyProvider.Instance = this;
         }
-
         private protected override void OnDisposeInternal() {
             this.Theme.Dispose();
             this.Screen.Dispose();
@@ -99,5 +99,6 @@ namespace GameFramework.Pro {
 
             return null;
         }
+        
     }
 }

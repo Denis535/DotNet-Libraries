@@ -8,6 +8,7 @@ namespace GameFramework.Pro {
 
     public abstract class WidgetBase {
         public sealed class Node2 : Node {
+            
             private readonly WidgetBase m_Widget;
 
             public WidgetBase Widget {
@@ -20,12 +21,10 @@ namespace GameFramework.Pro {
             public Node2(WidgetBase widget) {
                 this.m_Widget = widget;
             }
-
             protected override void OnDispose() {
                 this.Widget.OnDispose();
                 this.Widget.OnDisposeInternal();
             }
-
             protected override void OnActivate(object? argument) {
                 // top-down
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
@@ -37,7 +36,6 @@ namespace GameFramework.Pro {
                     ancestor.Widget.OnAfterDescendantActivate(this, argument);
                 }
             }
-
             protected override void OnDeactivate(object? argument) {
                 // top-down
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
@@ -53,6 +51,7 @@ namespace GameFramework.Pro {
             protected override void Sort(List<INode> children) {
                 this.Widget.Sort(children);
             }
+            
         }
 
         private readonly Node2 m_Node;
@@ -62,9 +61,7 @@ namespace GameFramework.Pro {
         public WidgetBase() {
             this.m_Node = new Node2(this);
         }
-
         protected internal abstract void OnDispose();
-
         private protected virtual void OnDisposeInternal() {
         }
 
@@ -73,21 +70,20 @@ namespace GameFramework.Pro {
 
         protected internal virtual void OnBeforeDescendantActivate(INode descendant, object? argument) {
         }
-
         protected internal virtual void OnAfterDescendantActivate(INode descendant, object? argument) {
         }
-
         protected internal virtual void OnBeforeDescendantDeactivate(INode descendant, object? argument) {
         }
-
         protected internal virtual void OnAfterDescendantDeactivate(INode descendant, object? argument) {
         }
 
         protected internal virtual void Sort(List<INode> children) {
         }
+        
     }
 
     public abstract class ViewableWidgetBase : WidgetBase {
+        
         private readonly object m_View = default!;
 
         public object View {
@@ -103,16 +99,17 @@ namespace GameFramework.Pro {
 
         internal ViewableWidgetBase() {
         }
-
         private protected override void OnDisposeInternal() {
             if (this.View is IDisposable view) {
                 view.Dispose();
             }
         }
+        
     }
 
     public abstract class ViewableWidgetBase<TView> : ViewableWidgetBase
         where TView : notnull {
+        
         protected new TView View {
             get => (TView)base.View;
             init => base.View = value;
@@ -120,9 +117,9 @@ namespace GameFramework.Pro {
 
         public ViewableWidgetBase() {
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+        
     }
 }

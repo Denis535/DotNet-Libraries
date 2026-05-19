@@ -7,6 +7,7 @@ namespace GameFramework.Pro {
     public abstract class ThemeBase2<TRouter, TApplication> : ThemeBase
         where TRouter : RouterBase
         where TApplication : ApplicationBase {
+        
         private readonly TRouter m_Router;
         private readonly TApplication m_Application;
 
@@ -35,9 +36,9 @@ namespace GameFramework.Pro {
             this.m_Router = this.Provider.RequireDependency<TRouter>();
             this.m_Application = this.Provider.RequireDependency<TApplication>();
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+        
     }
 }

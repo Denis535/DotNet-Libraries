@@ -6,6 +6,7 @@ namespace System {
     using System.Text;
 
     public interface IDependencyProvider {
+
         private static IDependencyProvider? m_Instance;
 
         [AllowNull]
@@ -46,5 +47,6 @@ namespace System {
         }
 
         protected object? GetValue(Type type, object? argument);
+
     }
 }

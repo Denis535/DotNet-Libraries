@@ -7,6 +7,7 @@ namespace System {
 
     public static class Check {
         public static class Argument {
+
             public static void Valid([DoesNotReturnIf(false)] bool isValid) {
                 if (!isValid) throw new ArgumentException(message: null);
             }
@@ -30,9 +31,11 @@ namespace System {
             public static void InRange(FormattableString message, [DoesNotReturnIf(false)] bool isValid) {
                 if (!isValid) throw new ArgumentOutOfRangeException(null, message: message.ToString());
             }
+
         }
 
         public static class Operation {
+
             public static void Valid([DoesNotReturnIf(false)] bool isValid) {
                 if (!isValid) throw new InvalidOperationException(message: null);
             }
@@ -56,6 +59,7 @@ namespace System {
             public static void Alive(FormattableString message, [DoesNotReturnIf(false)] bool isValid) {
                 if (!isValid) throw new ObjectDisposedException(null, message: message.ToString());
             }
+
         }
     }
 }

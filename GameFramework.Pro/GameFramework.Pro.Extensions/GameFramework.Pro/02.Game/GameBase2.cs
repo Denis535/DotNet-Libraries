@@ -5,6 +5,7 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class GameBase2 : GameBase {
+
         protected IDependencyProvider Provider {
             get {
                 Check.Operation.Alive($"Game {this} must be alive", !this.IsDisposed);
@@ -14,13 +15,14 @@ namespace GameFramework.Pro {
 
         public GameBase2() {
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+
     }
 
     public abstract class PlayerBase2 : PlayerBase {
+
         protected IDependencyProvider Provider {
             get {
                 Check.Operation.Alive($"Player {this} must be alive", !this.IsDisposed);
@@ -30,13 +32,14 @@ namespace GameFramework.Pro {
 
         public PlayerBase2() {
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+
     }
 
     public abstract class WorldBase2 : WorldBase {
+
         protected IDependencyProvider Provider {
             get {
                 Check.Operation.Alive($"World {this} must be alive", !this.IsDisposed);
@@ -46,13 +49,14 @@ namespace GameFramework.Pro {
 
         public WorldBase2() {
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+
     }
 
     public abstract class EntityBase2 : EntityBase {
+
         protected IDependencyProvider Provider {
             get {
                 Check.Operation.Alive($"Entity {this} must be alive", !this.IsDisposed);
@@ -62,9 +66,9 @@ namespace GameFramework.Pro {
 
         public EntityBase2() {
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+
     }
 }

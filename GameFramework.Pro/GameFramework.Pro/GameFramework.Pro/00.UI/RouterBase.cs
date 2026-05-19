@@ -5,10 +5,11 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class RouterBase : DisposableBase {
+
         public RouterBase() {
         }
-
         private protected override void OnDisposeInternal() {
         }
+
     }
 }

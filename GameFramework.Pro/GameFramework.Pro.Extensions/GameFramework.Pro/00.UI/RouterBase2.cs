@@ -8,6 +8,7 @@ namespace GameFramework.Pro {
         where TTheme : ThemeBase
         where TScreen : ScreenBase
         where TApplication : ApplicationBase {
+
         private readonly TApplication m_Application;
 
         protected IDependencyProvider Provider {
@@ -30,9 +31,9 @@ namespace GameFramework.Pro {
         public RouterBase2() {
             this.m_Application = this.Provider.RequireDependency<TApplication>();
         }
-
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
+
     }
 }

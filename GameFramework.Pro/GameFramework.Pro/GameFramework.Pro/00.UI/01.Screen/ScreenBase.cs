@@ -6,6 +6,7 @@ namespace GameFramework.Pro {
     using System.TreeMachine.Pro;
 
     public abstract class ScreenBase : DisposableBase {
+        
         private readonly TreeMachine m_Machine;
 
         protected TreeMachine Machine {
@@ -18,9 +19,9 @@ namespace GameFramework.Pro {
         public ScreenBase() {
             this.m_Machine = new TreeMachine();
         }
-
         private protected override void OnDisposeInternal() {
             this.Machine.Dispose();
         }
+        
     }
 }

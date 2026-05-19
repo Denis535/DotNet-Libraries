@@ -7,6 +7,7 @@ namespace GameFramework.Pro {
 
     public abstract class PlayListBase {
         public sealed class State2 : State {
+            
             private readonly PlayListBase m_PlayList;
 
             public PlayListBase PlayList {
@@ -19,7 +20,6 @@ namespace GameFramework.Pro {
             public State2(PlayListBase playList) {
                 this.m_PlayList = playList;
             }
-
             protected override void OnDispose() {
                 this.PlayList.OnDispose();
                 this.PlayList.OnDisposeInternal();
@@ -28,10 +28,10 @@ namespace GameFramework.Pro {
             protected override void OnActivate(object? argument) {
                 this.PlayList.OnActivate(argument);
             }
-
             protected override void OnDeactivate(object? argument) {
                 this.PlayList.OnDeactivate(argument);
             }
+            
         }
 
         private readonly State2 m_State;
@@ -41,13 +41,12 @@ namespace GameFramework.Pro {
         public PlayListBase() {
             this.m_State = new State2(this);
         }
-
         protected internal abstract void OnDispose();
-
         private protected virtual void OnDisposeInternal() {
         }
 
         protected internal abstract void OnActivate(object? argument);
         protected internal abstract void OnDeactivate(object? argument);
+        
     }
 }
