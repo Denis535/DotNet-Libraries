@@ -6,7 +6,7 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class ThemeBase : DisposableBase {
-        
+
         private readonly StateMachine m_Machine;
 
         protected StateMachine Machine {
@@ -22,6 +22,6 @@ namespace GameFramework.Pro {
         private protected override void OnDisposeInternal() {
             this.Machine.Dispose();
         }
-        
+
     }
 }

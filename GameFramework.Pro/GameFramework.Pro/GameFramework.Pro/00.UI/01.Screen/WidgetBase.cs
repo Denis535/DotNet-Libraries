@@ -8,7 +8,7 @@ namespace GameFramework.Pro {
 
     public abstract class WidgetBase {
         public sealed class Node2 : Node {
-            
+
             private readonly WidgetBase m_Widget;
 
             public WidgetBase Widget {
@@ -25,7 +25,7 @@ namespace GameFramework.Pro {
                 this.Widget.OnDispose();
                 this.Widget.OnDisposeInternal();
             }
-            
+
             protected override void OnActivate(object? argument) {
                 // top-down
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
@@ -52,7 +52,7 @@ namespace GameFramework.Pro {
             protected override void Sort(List<INode> children) {
                 this.Widget.Sort(children);
             }
-            
+
         }
 
         private readonly Node2 m_Node;
@@ -80,11 +80,11 @@ namespace GameFramework.Pro {
 
         protected internal virtual void Sort(List<INode> children) {
         }
-        
+
     }
 
     public abstract class ViewableWidgetBase : WidgetBase {
-        
+
         private readonly object m_View = default!;
 
         public object View {
@@ -105,12 +105,12 @@ namespace GameFramework.Pro {
                 view.Dispose();
             }
         }
-        
+
     }
 
     public abstract class ViewableWidgetBase<TView> : ViewableWidgetBase
         where TView : notnull {
-        
+
         protected new TView View {
             get => (TView)base.View;
             init => base.View = value;
@@ -121,6 +121,6 @@ namespace GameFramework.Pro {
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
-        
+
     }
 }

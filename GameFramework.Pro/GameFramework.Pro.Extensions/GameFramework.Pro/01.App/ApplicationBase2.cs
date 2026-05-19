@@ -5,7 +5,7 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class ApplicationBase2 : ApplicationBase {
-        
+
         protected IDependencyProvider Provider {
             get {
                 Check.Operation.Alive($"Application {this} must be alive", !this.IsDisposed);
@@ -18,6 +18,6 @@ namespace GameFramework.Pro {
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
-        
+
     }
 }

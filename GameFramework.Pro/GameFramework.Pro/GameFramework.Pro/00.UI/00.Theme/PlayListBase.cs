@@ -7,7 +7,7 @@ namespace GameFramework.Pro {
 
     public abstract class PlayListBase {
         public sealed class State2 : State {
-            
+
             private readonly PlayListBase m_PlayList;
 
             public PlayListBase PlayList {
@@ -31,7 +31,7 @@ namespace GameFramework.Pro {
             protected override void OnDeactivate(object? argument) {
                 this.PlayList.OnDeactivate(argument);
             }
-            
+
         }
 
         private readonly State2 m_State;
@@ -47,6 +47,6 @@ namespace GameFramework.Pro {
 
         protected internal abstract void OnActivate(object? argument);
         protected internal abstract void OnDeactivate(object? argument);
-        
+
     }
 }

@@ -9,7 +9,7 @@ namespace GameFramework.Pro {
         where TScreen : ScreenBase
         where TRouter : RouterBase
         where TApplication : ApplicationBase {
-        
+
         private readonly TTheme m_Theme = default!;
         private readonly TScreen m_Screen = default!;
         private readonly TRouter m_Router = default!;
@@ -99,6 +99,6 @@ namespace GameFramework.Pro {
 
             return null;
         }
-        
+
     }
 }

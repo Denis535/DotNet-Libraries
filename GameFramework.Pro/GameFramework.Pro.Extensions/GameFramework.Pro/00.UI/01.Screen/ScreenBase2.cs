@@ -7,7 +7,7 @@ namespace GameFramework.Pro {
     public abstract class ScreenBase2<TRouter, TApplication> : ScreenBase
         where TRouter : RouterBase
         where TApplication : ApplicationBase {
-        
+
         private readonly TRouter m_Router;
         private readonly TApplication m_Application;
 
@@ -39,6 +39,6 @@ namespace GameFramework.Pro {
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
-        
+
     }
 }

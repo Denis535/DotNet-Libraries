@@ -5,7 +5,7 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class PlayListBase2 : PlayListBase {
-        
+
         protected IDependencyProvider Provider {
             get {
                 Check.Operation.Alive($"PlayList {this} must be alive", !this.State.IsDisposed);
@@ -18,6 +18,6 @@ namespace GameFramework.Pro {
         private protected override void OnDisposeInternal() {
             base.OnDisposeInternal();
         }
-        
+
     }
 }
