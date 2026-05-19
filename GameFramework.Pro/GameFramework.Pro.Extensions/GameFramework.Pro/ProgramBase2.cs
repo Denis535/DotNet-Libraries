@@ -18,48 +18,48 @@ namespace GameFramework.Pro {
         protected TTheme Theme {
             get {
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                Check.Operation.Valid($"Theme must be non-null", this.m_Theme != null);
-                return this.m_Theme;
+                return this.m_Theme ?? throw Exceptions.Internal.NullReference($"Theme must be non-null");
             }
             init {
+                Check.Argument.NotNull($"Argument 'value' must be non-null", value != null);
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                this.m_Theme = value ?? throw new ArgumentNullException(nameof(value));
+                this.m_Theme = value;
             }
         }
 
         protected TScreen Screen {
             get {
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                Check.Operation.Valid($"Screen must be non-null", this.m_Screen != null);
-                return this.m_Screen;
+                return this.m_Screen ?? throw Exceptions.Internal.NullReference($"Screen must be non-null");
             }
             init {
+                Check.Argument.NotNull($"Argument 'value' must be non-null", value != null);
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                this.m_Screen = value ?? throw new ArgumentNullException(nameof(value));
+                this.m_Screen = value;
             }
         }
 
         protected TRouter Router {
             get {
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                Check.Operation.Valid($"Router must be non-null", this.m_Router != null);
-                return this.m_Router;
+                return this.m_Router ?? throw Exceptions.Internal.NullReference($"Router must be non-null");
             }
             init {
+                Check.Argument.NotNull($"Argument 'value' must be non-null", value != null);
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                this.m_Router = value ?? throw new ArgumentNullException(nameof(value));
+                this.m_Router = value;
             }
         }
 
         protected TApplication Application {
             get {
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                Check.Operation.Valid($"Application must be non-null", this.m_Application != null);
-                return this.m_Application;
+                return this.m_Application ?? throw Exceptions.Internal.NullReference($"Application must be non-null");
             }
             init {
+                Check.Argument.NotNull($"Argument 'value' must be non-null", value != null);
                 Check.Operation.Alive($"Program {this} must be alive", !this.IsDisposed);
-                this.m_Application = value ?? throw new ArgumentNullException(nameof(value));
+                this.m_Application = value;
             }
         }
 
@@ -84,19 +84,15 @@ namespace GameFramework.Pro {
             if (type.IsAssignableFrom(typeof(TTheme))) {
                 return this.Theme;
             }
-
             if (type.IsAssignableFrom(typeof(TScreen))) {
                 return this.Screen;
             }
-
             if (type.IsAssignableFrom(typeof(TRouter))) {
                 return this.Router;
             }
-
             if (type.IsAssignableFrom(typeof(TApplication))) {
                 return this.Application;
             }
-
             return null;
         }
 

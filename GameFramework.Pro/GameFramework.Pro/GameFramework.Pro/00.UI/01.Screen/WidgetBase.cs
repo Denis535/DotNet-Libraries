@@ -93,8 +93,9 @@ namespace GameFramework.Pro {
                 return this.m_View;
             }
             protected init {
+                Check.Argument.NotNull($"Argument 'value' must be non-null", value != null);
                 Check.Operation.Alive($"Widget {this} must be alive", !this.Node.IsDisposed);
-                this.m_View = value ?? throw new ArgumentNullException(nameof(value));
+                this.m_View = value;
             }
         }
 
@@ -112,7 +113,7 @@ namespace GameFramework.Pro {
         where TView : notnull {
 
         protected new TView View {
-            get => (TView)base.View;
+            get => (TView) base.View;
             init => base.View = value;
         }
 
