@@ -25,6 +25,7 @@ namespace GameFramework.Pro {
                 this.Widget.OnDispose();
                 this.Widget.OnDisposeInternal();
             }
+            
             protected override void OnActivate(object? argument) {
                 // top-down
                 foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {

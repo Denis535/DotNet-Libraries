@@ -41,7 +41,6 @@ namespace System {
             }
             this.m_Lifecycle = Lifecycle.Disposed;
         }
-
         protected abstract void OnDispose();
         private protected virtual void OnDisposeInternal() {
         }
