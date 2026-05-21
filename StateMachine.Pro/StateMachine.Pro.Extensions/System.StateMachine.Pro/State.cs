@@ -6,14 +6,16 @@ namespace System.StateMachine.Pro {
     using System.Linq;
     using System.Text;
 
-    public partial class State : IState {
+    public abstract partial class State<T> : IState<T> where T : class, IState<T> {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private object? m_Owner = null;
         private Activity m_Activity = Activity.Inactive;
 
+        private T Self => (T) (object) this;
+
     }
-    public partial class State {
+    public abstract partial class State<T> {
 
         // IsDisposed
         public bool IsDisposing {
@@ -47,10 +49,10 @@ namespace System.StateMachine.Pro {
         }
 
         // Machine
-        public IStateMachine? Machine {
+        public IStateMachine<T>? Machine {
             get {
                 Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
-                return (this.Owner as IStateMachine) ?? (this.Owner as IState)?.Machine;
+                return (this.Owner as IStateMachine<T>) ?? (this.Owner as T)?.Machine;
             }
         }
 
@@ -62,21 +64,21 @@ namespace System.StateMachine.Pro {
                 return this.Parent == null;
             }
         }
-        public IState Root {
+        public T Root {
             get {
                 Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
-                return this.Parent?.Root ?? this;
+                return this.Parent?.Root ?? this.Self;
             }
         }
 
         // Parent
-        public IState? Parent {
+        public T? Parent {
             get {
                 Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
-                return this.Owner as IState;
+                return this.Owner as T;
             }
         }
-        public IEnumerable<IState> Ancestors {
+        public IEnumerable<T> Ancestors {
             get {
                 Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
                 if (this.Parent != null) {
@@ -85,10 +87,10 @@ namespace System.StateMachine.Pro {
                 }
             }
         }
-        public IEnumerable<IState> AncestorsAndSelf {
+        public IEnumerable<T> AncestorsAndSelf {
             get {
                 Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
-                return this.Ancestors.Prepend( this );
+                return this.Ancestors.Prepend( this.Self );
             }
         }
 
@@ -107,7 +109,7 @@ namespace System.StateMachine.Pro {
         }
 
     }
-    public partial class State {
+    public abstract partial class State<T> {
 
         // Constructor
         public State() {
@@ -124,10 +126,10 @@ namespace System.StateMachine.Pro {
         }
 
     }
-    public partial class State {
+    public abstract partial class State<T> {
 
         // Attach
-        private void Attach(IStateMachine machine, object? argument) {
+        private void Attach(IStateMachine<T> machine, object? argument) {
             Check.Argument.NotNull( $"Argument 'machine' must be non-null", machine != null );
             Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"State {this} must have no {this.Owner} owner", this.Owner == null );
@@ -139,7 +141,7 @@ namespace System.StateMachine.Pro {
                 this.Activate( argument );
             }
         }
-        private void Attach(IState parent, object? argument) {
+        private void Attach(T parent, object? argument) {
             Check.Argument.NotNull( $"Argument 'parent' must be non-null", parent != null );
             Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"State {this} must have no {this.Owner} owner", this.Owner == null );
@@ -153,7 +155,7 @@ namespace System.StateMachine.Pro {
         }
 
         // Detach
-        private void Detach(IStateMachine machine, object? argument) {
+        private void Detach(IStateMachine<T> machine, object? argument) {
             Check.Argument.NotNull( $"Argument 'machine' must be non-null", machine != null );
             Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"State {this} must have {machine} owner", this.Owner == machine );
@@ -165,7 +167,7 @@ namespace System.StateMachine.Pro {
                 this.Owner = null;
             }
         }
-        private void Detach(IState parent, object? argument) {
+        private void Detach(T parent, object? argument) {
             Check.Argument.NotNull( $"Argument 'parent' must be non-null", parent != null );
             Check.Operation.Alive( $"State {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"State {this} must have {parent} owner", this.Owner == parent );
@@ -187,7 +189,7 @@ namespace System.StateMachine.Pro {
         }
 
     }
-    public partial class State {
+    public abstract partial class State<T> {
 
         // Activate
         private void Activate(object? argument) {

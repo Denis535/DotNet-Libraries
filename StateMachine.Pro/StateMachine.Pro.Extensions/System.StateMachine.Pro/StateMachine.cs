@@ -4,13 +4,13 @@ namespace System.StateMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public sealed partial class StateMachine : IStateMachine {
+    public sealed partial class StateMachine<T> : IStateMachine<T> where T : class, IState<T> {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
-        private IState? m_Root = null;
+        private T? m_Root = null;
 
     }
-    public sealed partial class StateMachine {
+    public sealed partial class StateMachine<T> {
 
         // IsDisposed
         public bool IsDisposing {
@@ -25,7 +25,7 @@ namespace System.StateMachine.Pro {
         }
 
         // Root
-        public IState? Root {
+        public T? Root {
             get {
                 Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Root;
@@ -42,7 +42,7 @@ namespace System.StateMachine.Pro {
         }
 
     }
-    public sealed partial class StateMachine {
+    public sealed partial class StateMachine<T> {
 
         // Constructor
         public StateMachine() {
@@ -57,10 +57,10 @@ namespace System.StateMachine.Pro {
         }
 
     }
-    public sealed partial class StateMachine {
+    public sealed partial class StateMachine<T> {
 
         // SetRoot
-        public void SetRoot(IState? root, object? argument, Action<IState, object?>? callback = null) {
+        public void SetRoot(T? root, object? argument, Action<T, object?>? callback = null) {
             Check.Operation.Alive( $"StateMachine {this} must be non-disposed", !this.IsDisposed );
             if (this.Root != null) {
                 this.RemoveRoot( this.Root, argument, callback );
@@ -71,7 +71,7 @@ namespace System.StateMachine.Pro {
         }
 
         // AddRoot
-        private void AddRoot(IState root, object? argument) {
+        private void AddRoot(T root, object? argument) {
             Check.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
             Check.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
             Check.Argument.Valid( $"Argument 'root' ({root}) must have no {root.Owner} owner", root.Owner == null );
@@ -82,7 +82,7 @@ namespace System.StateMachine.Pro {
         }
 
         // RemoveRoot
-        private void RemoveRoot(IState root, object? argument, Action<IState, object?>? callback = null) {
+        private void RemoveRoot(T root, object? argument, Action<T, object?>? callback = null) {
             Check.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
             Check.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
             Check.Argument.Valid( $"Argument 'root' ({root}) must have {this} owner", root.Owner == this );

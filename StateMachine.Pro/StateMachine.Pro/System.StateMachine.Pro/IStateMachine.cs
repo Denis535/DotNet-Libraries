@@ -10,8 +10,11 @@ namespace System.StateMachine.Pro {
         public bool IsDisposing { get; }
         public bool IsDisposed { get; }
 
+    }
+    public interface IStateMachine<out T> : IStateMachine where T : IState<T> {
+
         // Root
-        public IState? Root { get; }
+        public T? Root { get; }
 
     }
 }

@@ -11,34 +11,38 @@ namespace System.StateMachine.Pro {
         public bool IsDisposing { get; }
         public bool IsDisposed { get; }
 
+    }
+    public partial interface IState<T> : IState where T : IState<T> {
+
         // Owner
         public object? Owner { get; }
 
         // Machine
-        public IStateMachine? Machine { get; }
+        public IStateMachine<T>? Machine { get; }
 
         // Root
-        [MemberNotNullWhen( false, nameof( Parent ) )] public bool IsRoot { get; }
-        public IState Root { get; }
+        [MemberNotNullWhen( false, nameof( Parent ) )]
+        public bool IsRoot { get; }
+        public T Root { get; }
 
         // Parent
-        public IState? Parent { get; }
-        public IEnumerable<IState> Ancestors { get; }
-        public IEnumerable<IState> AncestorsAndSelf { get; }
+        public T? Parent { get; }
+        public IEnumerable<T> Ancestors { get; }
+        public IEnumerable<T> AncestorsAndSelf { get; }
 
         // Activity
         public Activity Activity { get; }
 
     }
-    public partial interface IState {
+    public partial interface IState<T> {
 
         // Attach
-        protected internal void Attach(IStateMachine machine, object? argument);
-        protected internal void Attach(IState parent, object? argument);
+        protected internal void Attach(IStateMachine<T> machine, object? argument);
+        protected internal void Attach(T parent, object? argument);
 
         // Detach
-        protected internal void Detach(IStateMachine machine, object? argument);
-        protected internal void Detach(IState parent, object? argument);
+        protected internal void Detach(IStateMachine<T> machine, object? argument);
+        protected internal void Detach(T parent, object? argument);
 
         // Activate
         protected internal void Activate(object? argument);
