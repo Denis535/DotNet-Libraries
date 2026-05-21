@@ -11,39 +11,44 @@ namespace System.TreeMachine.Pro {
         public bool IsDisposing { get; }
         public bool IsDisposed { get; }
 
+    }
+    public partial interface INode<T> : INode where T : INode {
+
         // Owner
         public object? Owner { get; }
 
         // Machine
-        public ITreeMachine? Machine { get; }
+        public ITreeMachine<T>? Machine { get; }
 
         // Root
-        [MemberNotNullWhen( false, nameof( Parent ) )] public bool IsRoot { get; }
-        public INode Root { get; }
+        [MemberNotNullWhen( false, nameof( Parent ) )]
+        public bool IsRoot { get; }
+
+        public T Root { get; }
 
         // Parent
-        public INode? Parent { get; }
-        public IEnumerable<INode> Ancestors { get; }
-        public IEnumerable<INode> AncestorsAndSelf { get; }
+        public T? Parent { get; }
+        public IEnumerable<T> Ancestors { get; }
+        public IEnumerable<T> AncestorsAndSelf { get; }
 
         // Activity
         public Activity Activity { get; }
 
         // Children
-        public IEnumerable<INode> Children { get; }
-        public IEnumerable<INode> Descendants { get; }
-        public IEnumerable<INode> DescendantsAndSelf { get; }
+        public IReadOnlyList<T> Children { get; }
+        public IEnumerable<T> Descendants { get; }
+        public IEnumerable<T> DescendantsAndSelf { get; }
 
     }
-    public partial interface INode {
+    public partial interface INode<T> {
 
         // Attach
-        protected internal void Attach(ITreeMachine machine, object? argument);
-        protected internal void Attach(INode parent, object? argument);
+        protected internal void Attach(ITreeMachine<T> machine, object? argument);
+        protected internal void Attach(T parent, object? argument);
 
         // Detach
-        protected internal void Detach(ITreeMachine machine, object? argument);
-        protected internal void Detach(INode parent, object? argument);
+        protected internal void Detach(ITreeMachine<T> machine, object? argument);
+        protected internal void Detach(T parent, object? argument);
 
         // Activate
         protected internal void Activate(object? argument);

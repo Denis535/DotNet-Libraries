@@ -10,9 +10,9 @@ namespace System.TreeMachine.Pro {
 
         [Test]
         public void Test_00() {
-            using (var machine = new TreeMachine()) {
+            using (var machine = new TreeMachine<Node2>()) {
                 // machine.SetRoot Node
-                machine.SetRoot( new Node(), null, null );
+                machine.SetRoot( new Node2(), null );
                 Assert.That( machine.Root, Is.Not.Null );
                 Assert.That( machine.Root.Owner, Is.EqualTo( machine ) );
                 Assert.That( machine.Root.Machine, Is.EqualTo( machine ) );
@@ -23,11 +23,11 @@ namespace System.TreeMachine.Pro {
                 Assert.That( machine.Root.AncestorsAndSelf.Count(), Is.EqualTo( 1 ) );
                 Assert.That( machine.Root.Activity, Is.EqualTo( Activity.Active ) );
                 Assert.That( machine.Root.Children.Count, Is.EqualTo( 0 ) );
-                Assert.That( machine.Root.Descendants.Count, Is.EqualTo( 0 ) );
-                Assert.That( machine.Root.DescendantsAndSelf.Count, Is.EqualTo( 1 ) );
+                Assert.That( machine.Root.Descendants.Count(), Is.EqualTo( 0 ) );
+                Assert.That( machine.Root.DescendantsAndSelf.Count(), Is.EqualTo( 1 ) );
                 {
                     // machine.Root.AddChildren Node, Node
-                    ((Node) machine.Root).AddChildren( [ new Node(), new Node() ], null );
+                    machine.Root.AddChildren( [ new Node2(), new Node2() ], null );
                     Assert.That( machine.Root, Is.Not.Null );
                     Assert.That( machine.Root.Owner, Is.EqualTo( machine ) );
                     Assert.That( machine.Root.Machine, Is.EqualTo( machine ) );
@@ -38,8 +38,8 @@ namespace System.TreeMachine.Pro {
                     Assert.That( machine.Root.AncestorsAndSelf.Count(), Is.EqualTo( 1 ) );
                     Assert.That( machine.Root.Activity, Is.EqualTo( Activity.Active ) );
                     Assert.That( machine.Root.Children.Count, Is.EqualTo( 2 ) );
-                    Assert.That( machine.Root.Descendants.Count, Is.EqualTo( 2 ) );
-                    Assert.That( machine.Root.DescendantsAndSelf.Count, Is.EqualTo( 3 ) );
+                    Assert.That( machine.Root.Descendants.Count(), Is.EqualTo( 2 ) );
+                    Assert.That( machine.Root.DescendantsAndSelf.Count(), Is.EqualTo( 3 ) );
                     foreach (var child in machine.Root.Children) {
                         Assert.That( child.Owner, Is.EqualTo( machine.Root ) );
                         Assert.That( child.Machine, Is.EqualTo( machine ) );
@@ -50,11 +50,11 @@ namespace System.TreeMachine.Pro {
                         Assert.That( child.AncestorsAndSelf.Count(), Is.EqualTo( 2 ) );
                         Assert.That( child.Activity, Is.EqualTo( Activity.Active ) );
                         Assert.That( child.Children.Count, Is.EqualTo( 0 ) );
-                        Assert.That( child.Descendants.Count, Is.EqualTo( 0 ) );
-                        Assert.That( child.DescendantsAndSelf.Count, Is.EqualTo( 1 ) );
+                        Assert.That( child.Descendants.Count(), Is.EqualTo( 0 ) );
+                        Assert.That( child.DescendantsAndSelf.Count(), Is.EqualTo( 1 ) );
                     }
                     // machine.Root.RemoveChildren true
-                    _ = ((Node) machine.Root).RemoveChildren( i => true, null, null );
+                    _ = machine.Root.RemoveChildren( i => true, null );
                     Assert.That( machine.Root, Is.Not.Null );
                     Assert.That( machine.Root.Owner, Is.EqualTo( machine ) );
                     Assert.That( machine.Root.Machine, Is.EqualTo( machine ) );
@@ -65,20 +65,20 @@ namespace System.TreeMachine.Pro {
                     Assert.That( machine.Root.AncestorsAndSelf.Count(), Is.EqualTo( 1 ) );
                     Assert.That( machine.Root.Activity, Is.EqualTo( Activity.Active ) );
                     Assert.That( machine.Root.Children.Count, Is.EqualTo( 0 ) );
-                    Assert.That( machine.Root.Descendants.Count, Is.EqualTo( 0 ) );
-                    Assert.That( machine.Root.DescendantsAndSelf.Count, Is.EqualTo( 1 ) );
+                    Assert.That( machine.Root.Descendants.Count(), Is.EqualTo( 0 ) );
+                    Assert.That( machine.Root.DescendantsAndSelf.Count(), Is.EqualTo( 1 ) );
                 }
                 // machine.SetRoot null
-                machine.SetRoot( null, null, null );
+                machine.SetRoot( null, null );
                 Assert.That( machine.Root, Is.Null );
             }
         }
 
         [Test]
         public void Test_01() {
-            using (var machine = new TreeMachine()) {
+            using (var machine = new TreeMachine<Node2>()) {
                 // machine.SetRoot Node
-                machine.SetRoot( new Node(), null, null );
+                machine.SetRoot( new Node2(), null, null );
                 Assert.That( machine.Root, Is.Not.Null );
                 Assert.That( machine.Root.Owner, Is.EqualTo( machine ) );
                 Assert.That( machine.Root.Machine, Is.EqualTo( machine ) );
@@ -89,11 +89,11 @@ namespace System.TreeMachine.Pro {
                 Assert.That( machine.Root.AncestorsAndSelf.Count(), Is.EqualTo( 1 ) );
                 Assert.That( machine.Root.Activity, Is.EqualTo( Activity.Active ) );
                 Assert.That( machine.Root.Children.Count, Is.EqualTo( 0 ) );
-                Assert.That( machine.Root.Descendants.Count, Is.EqualTo( 0 ) );
-                Assert.That( machine.Root.DescendantsAndSelf.Count, Is.EqualTo( 1 ) );
+                Assert.That( machine.Root.Descendants.Count(), Is.EqualTo( 0 ) );
+                Assert.That( machine.Root.DescendantsAndSelf.Count(), Is.EqualTo( 1 ) );
                 {
                     // machine.Root.AddChildren Node, Node
-                    ((Node) machine.Root).AddChildren( [ new Node(), new Node() ], null );
+                    machine.Root.AddChildren( [ new Node2(), new Node2() ], null );
                     Assert.That( machine.Root, Is.Not.Null );
                     Assert.That( machine.Root.Owner, Is.EqualTo( machine ) );
                     Assert.That( machine.Root.Machine, Is.EqualTo( machine ) );
@@ -104,8 +104,8 @@ namespace System.TreeMachine.Pro {
                     Assert.That( machine.Root.AncestorsAndSelf.Count(), Is.EqualTo( 1 ) );
                     Assert.That( machine.Root.Activity, Is.EqualTo( Activity.Active ) );
                     Assert.That( machine.Root.Children.Count, Is.EqualTo( 2 ) );
-                    Assert.That( machine.Root.Descendants.Count, Is.EqualTo( 2 ) );
-                    Assert.That( machine.Root.DescendantsAndSelf.Count, Is.EqualTo( 3 ) );
+                    Assert.That( machine.Root.Descendants.Count(), Is.EqualTo( 2 ) );
+                    Assert.That( machine.Root.DescendantsAndSelf.Count(), Is.EqualTo( 3 ) );
                     foreach (var child in machine.Root.Children) {
                         Assert.That( child.Owner, Is.EqualTo( machine.Root ) );
                         Assert.That( child.Machine, Is.EqualTo( machine ) );
@@ -116,20 +116,22 @@ namespace System.TreeMachine.Pro {
                         Assert.That( child.AncestorsAndSelf.Count(), Is.EqualTo( 2 ) );
                         Assert.That( child.Activity, Is.EqualTo( Activity.Active ) );
                         Assert.That( child.Children.Count, Is.EqualTo( 0 ) );
-                        Assert.That( child.Descendants.Count, Is.EqualTo( 0 ) );
-                        Assert.That( child.DescendantsAndSelf.Count, Is.EqualTo( 1 ) );
+                        Assert.That( child.Descendants.Count(), Is.EqualTo( 0 ) );
+                        Assert.That( child.DescendantsAndSelf.Count(), Is.EqualTo( 1 ) );
                     }
                     //  machine.Root.Children.Reverse.Dispose
                     foreach (var child in machine.Root.Children.Reverse()) {
-                        ((IDisposable) child).Dispose();
+                        child.Dispose();
                         Assert.That( child.IsDisposed, Is.True );
                     }
                 }
                 // machine.Root.Dispose
-                ((IDisposable) machine.Root).Dispose();
+                machine.Root.Dispose();
                 Assert.That( machine.Root.IsDisposed, Is.True );
             }
         }
 
+    }
+    internal sealed class Node2 : Node<Node2> {
     }
 }

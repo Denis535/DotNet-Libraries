@@ -6,15 +6,17 @@ namespace System.TreeMachine.Pro {
     using System.Linq;
     using System.Text;
 
-    public partial class Node : INode {
+    public abstract partial class Node<T> : INode<T> where T : class, INode<T> {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
         private object? m_Owner = null;
         private Activity m_Activity = Activity.Inactive;
-        private readonly List<INode> m_Children = new List<INode>( 0 );
+        private readonly List<T> m_Children = new List<T>( 0 );
+
+        private T Self => (T) (object) this;
 
     }
-    public partial class Node {
+    public abstract partial class Node<T> {
 
         // IsDisposed
         public bool IsDisposing {
@@ -48,10 +50,10 @@ namespace System.TreeMachine.Pro {
         }
 
         // Machine
-        public ITreeMachine? Machine {
+        public ITreeMachine<T>? Machine {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
-                return (this.Owner as ITreeMachine) ?? (this.Owner as INode)?.Machine;
+                return (this.Owner as ITreeMachine<T>) ?? (this.Owner as T)?.Machine;
             }
         }
 
@@ -63,21 +65,21 @@ namespace System.TreeMachine.Pro {
                 return this.Parent == null;
             }
         }
-        public INode Root {
+        public T Root {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
-                return this.Parent?.Root ?? this;
+                return this.Parent?.Root ?? this.Self;
             }
         }
 
         // Parent
-        public INode? Parent {
+        public T? Parent {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
-                return this.Owner as INode;
+                return this.Owner as T;
             }
         }
-        public IEnumerable<INode> Ancestors {
+        public IEnumerable<T> Ancestors {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
                 if (this.Parent != null) {
@@ -86,10 +88,10 @@ namespace System.TreeMachine.Pro {
                 }
             }
         }
-        public IEnumerable<INode> AncestorsAndSelf {
+        public IEnumerable<T> AncestorsAndSelf {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
-                return this.Ancestors.Prepend( this );
+                return this.Ancestors.Prepend( this.Self );
             }
         }
 
@@ -108,13 +110,13 @@ namespace System.TreeMachine.Pro {
         }
 
         // Children
-        public IReadOnlyList<INode> Children {
+        public IReadOnlyList<T> Children {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Children;
             }
         }
-        public IEnumerable<INode> Descendants {
+        public IEnumerable<T> Descendants {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
                 foreach (var child in this.Children) {
@@ -123,15 +125,15 @@ namespace System.TreeMachine.Pro {
                 }
             }
         }
-        public IEnumerable<INode> DescendantsAndSelf {
+        public IEnumerable<T> DescendantsAndSelf {
             get {
                 Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
-                return this.Descendants.Prepend( this );
+                return this.Descendants.Prepend( this.Self );
             }
         }
 
     }
-    public partial class Node {
+    public abstract partial class Node<T> {
 
         // Constructor
         public Node() {
@@ -149,10 +151,10 @@ namespace System.TreeMachine.Pro {
         }
 
     }
-    public partial class Node {
+    public abstract partial class Node<T> {
 
         // Attach
-        private void Attach(ITreeMachine machine, object? argument) {
+        private void Attach(ITreeMachine<T> machine, object? argument) {
             Check.Argument.NotNull( $"Argument 'machine' must be non-null", machine != null );
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"Node {this} must have no {this.Owner} owner", this.Owner == null );
@@ -164,7 +166,7 @@ namespace System.TreeMachine.Pro {
                 this.Activate( argument );
             }
         }
-        private void Attach(INode parent, object? argument) {
+        private void Attach(T parent, object? argument) {
             Check.Argument.NotNull( $"Argument 'parent' must be non-null", parent != null );
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"Node {this} must have no {this.Owner} owner", this.Owner == null );
@@ -178,7 +180,7 @@ namespace System.TreeMachine.Pro {
         }
 
         // Detach
-        private void Detach(ITreeMachine machine, object? argument) {
+        private void Detach(ITreeMachine<T> machine, object? argument) {
             Check.Argument.NotNull( $"Argument 'machine' must be non-null", machine != null );
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"Node {this} must have {machine} owner", this.Owner == machine );
@@ -190,7 +192,7 @@ namespace System.TreeMachine.Pro {
                 this.Owner = null;
             }
         }
-        private void Detach(INode parent, object? argument) {
+        private void Detach(T parent, object? argument) {
             Check.Argument.NotNull( $"Argument 'parent' must be non-null", parent != null );
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"Node {this} must have {parent} owner", this.Owner == parent );
@@ -212,7 +214,7 @@ namespace System.TreeMachine.Pro {
         }
 
     }
-    public partial class Node {
+    public abstract partial class Node<T> {
 
         // Activate
         private void Activate(object? argument) {
@@ -243,10 +245,10 @@ namespace System.TreeMachine.Pro {
         }
 
     }
-    public partial class Node {
+    public abstract partial class Node<T> {
 
         // AddChild
-        public void AddChild(INode child, object? argument) {
+        public void AddChild(T child, object? argument) {
             Check.Argument.NotNull( $"Argument 'child' must be non-null", child != null );
             Check.Argument.Valid( $"Argument 'child' ({child}) must be non-disposed", !child.IsDisposed );
             Check.Argument.Valid( $"Argument 'child' ({child}) must have no {child.Owner} owner", child.Owner == null );
@@ -254,9 +256,9 @@ namespace System.TreeMachine.Pro {
             Check.Operation.Valid( $"Node {this} must have no {child} child", !this.Children.Contains( child ) );
             this.m_Children.Add( child );
             this.Sort( this.m_Children );
-            child.Attach( this, argument );
+            child.Attach( this.Self, argument );
         }
-        public void AddChildren(IEnumerable<INode> children, object? argument) {
+        public void AddChildren(IEnumerable<T> children, object? argument) {
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             foreach (var child in children) {
                 this.AddChild( child, argument );
@@ -264,13 +266,13 @@ namespace System.TreeMachine.Pro {
         }
 
         // RemoveChild
-        public void RemoveChild(INode child, object? argument, Action<INode, object?>? callback = null) {
+        public void RemoveChild(T child, object? argument, Action<T, object?>? callback = null) {
             Check.Argument.NotNull( $"Argument 'child' must be non-null", child != null );
             Check.Argument.Valid( $"Argument 'child' ({child}) must be non-disposed", !child.IsDisposed );
             Check.Argument.Valid( $"Argument 'child' ({child}) must have {this} owner", child.Owner == this );
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"Node {this} must have {child} child", this.Children.Contains( child ) );
-            child.Detach( this, argument );
+            child.Detach( this.Self, argument );
             _ = this.m_Children.Remove( child );
             if (callback != null) {
                 callback.Invoke( child, argument );
@@ -278,7 +280,7 @@ namespace System.TreeMachine.Pro {
                 child.Dispose();
             }
         }
-        public int RemoveChildren(Func<INode, bool> predicate, object? argument, Action<INode, object?>? callback = null) {
+        public int RemoveChildren(Func<T, bool> predicate, object? argument, Action<T, object?>? callback = null) {
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             var count = 0;
             foreach (var child in this.Children.Reverse().Where( predicate )) {
@@ -289,18 +291,18 @@ namespace System.TreeMachine.Pro {
         }
 
         // RemoveSelf
-        public void RemoveSelf(object? argument, Action<INode, object?>? callback = null) {
+        public void RemoveSelf(object? argument, Action<T, object?>? callback = null) {
             Check.Operation.Alive( $"Node {this} must be non-disposed", !this.IsDisposed );
             Check.Operation.Valid( $"Node {this} must have owner", this.Owner != null );
-            if (this.Owner is Node parent) {
-                parent.RemoveChild( this, argument, callback );
+            if (this.Owner is TreeMachine<T> machine) {
+                machine.SetRoot( null, argument, callback );
             } else {
-                ((TreeMachine) this.Owner).SetRoot( null, argument, callback );
+                ((Node<T>) this.Owner).RemoveChild( this.Self, argument, callback );
             }
         }
 
         // Sort
-        protected virtual void Sort(List<INode> children) {
+        protected virtual void Sort(List<T> children) {
             //children.Sort( (a, b) => Comparer<int>.Default.Compare( GetOrderOf( a ), GetOrderOf( b ) ) );
         }
 

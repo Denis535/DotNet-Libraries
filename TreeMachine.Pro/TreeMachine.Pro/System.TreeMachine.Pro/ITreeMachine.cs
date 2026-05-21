@@ -10,8 +10,11 @@ namespace System.TreeMachine.Pro {
         public bool IsDisposing { get; }
         public bool IsDisposed { get; }
 
+    }
+    public interface ITreeMachine<out T> : ITreeMachine where T : INode {
+
         // Root
-        public INode? Root { get; }
+        public T? Root { get; }
 
     }
 }

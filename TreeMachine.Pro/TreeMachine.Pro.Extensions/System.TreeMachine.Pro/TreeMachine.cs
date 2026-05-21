@@ -4,13 +4,13 @@ namespace System.TreeMachine.Pro {
     using System.Collections.Generic;
     using System.Text;
 
-    public sealed partial class TreeMachine : ITreeMachine {
+    public sealed partial class TreeMachine<T> : ITreeMachine<T> where T : class, INode<T> {
 
         private Lifecycle m_Lifecycle = Lifecycle.Alive;
-        private INode? m_Root = null;
+        private T? m_Root = null;
 
     }
-    public sealed partial class TreeMachine {
+    public sealed partial class TreeMachine<T> {
 
         // IsDisposed
         public bool IsDisposing {
@@ -25,7 +25,7 @@ namespace System.TreeMachine.Pro {
         }
 
         // Root
-        public INode? Root {
+        public T? Root {
             get {
                 Check.Operation.Alive( $"TreeMachine {this} must be non-disposed", !this.IsDisposed );
                 return this.m_Root;
@@ -42,7 +42,7 @@ namespace System.TreeMachine.Pro {
         }
 
     }
-    public sealed partial class TreeMachine {
+    public sealed partial class TreeMachine<T> {
 
         // Constructor
         public TreeMachine() {
@@ -57,10 +57,10 @@ namespace System.TreeMachine.Pro {
         }
 
     }
-    public sealed partial class TreeMachine {
+    public sealed partial class TreeMachine<T> {
 
         // SetRoot
-        public void SetRoot(INode? root, object? argument, Action<INode, object?>? callback = null) {
+        public void SetRoot(T? root, object? argument, Action<T, object?>? callback = null) {
             Check.Operation.Alive( $"TreeMachine {this} must be non-disposed", !this.IsDisposed );
             if (this.Root != null) {
                 this.RemoveRoot( this.Root, argument, callback );
@@ -71,7 +71,7 @@ namespace System.TreeMachine.Pro {
         }
 
         // AddRoot
-        private void AddRoot(INode root, object? argument) {
+        private void AddRoot(T root, object? argument) {
             Check.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
             Check.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
             Check.Argument.Valid( $"Argument 'root' ({root}) must have no {root.Owner} owner", root.Owner == null );
@@ -82,7 +82,7 @@ namespace System.TreeMachine.Pro {
         }
 
         // RemoveRoot
-        private void RemoveRoot(INode root, object? argument, Action<INode, object?>? callback = null) {
+        private void RemoveRoot(T root, object? argument, Action<T, object?>? callback = null) {
             Check.Argument.NotNull( $"Argument 'root' must be non-null", root != null );
             Check.Argument.Valid( $"Argument 'root' ({root}) must be non-disposed", !root.IsDisposed );
             Check.Argument.Valid( $"Argument 'root' ({root}) must have {this} owner", root.Owner == this );
