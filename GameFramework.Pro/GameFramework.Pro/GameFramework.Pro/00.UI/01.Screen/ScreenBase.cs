@@ -7,9 +7,9 @@ namespace GameFramework.Pro {
 
     public abstract class ScreenBase : DisposableBase {
 
-        private readonly TreeMachine m_Machine;
+        private readonly TreeMachine<WidgetBase.Node2> m_Machine;
 
-        protected TreeMachine Machine {
+        protected TreeMachine<WidgetBase.Node2> Machine {
             get {
                 Check.Operation.Alive($"Screen {this} must be alive", !this.IsDisposed);
                 return this.m_Machine;
@@ -17,7 +17,7 @@ namespace GameFramework.Pro {
         }
 
         public ScreenBase() {
-            this.m_Machine = new TreeMachine();
+            this.m_Machine = new TreeMachine<WidgetBase.Node2>();
         }
         private protected override void OnDisposeInternal() {
             this.Machine.Dispose();

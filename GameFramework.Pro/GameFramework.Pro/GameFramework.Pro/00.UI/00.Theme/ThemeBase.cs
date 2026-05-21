@@ -7,9 +7,9 @@ namespace GameFramework.Pro {
 
     public abstract class ThemeBase : DisposableBase {
 
-        private readonly StateMachine m_Machine;
+        private readonly StateMachine<PlayListBase.State2> m_Machine;
 
-        protected StateMachine Machine {
+        protected StateMachine<PlayListBase.State2> Machine {
             get {
                 Check.Operation.Alive($"Theme {this} must be alive", !this.IsDisposed);
                 return this.m_Machine;
@@ -17,7 +17,7 @@ namespace GameFramework.Pro {
         }
 
         public ThemeBase() {
-            this.m_Machine = new StateMachine();
+            this.m_Machine = new StateMachine<PlayListBase.State2>();
         }
         private protected override void OnDisposeInternal() {
             this.Machine.Dispose();

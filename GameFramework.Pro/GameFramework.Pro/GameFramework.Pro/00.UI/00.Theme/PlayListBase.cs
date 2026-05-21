@@ -6,7 +6,7 @@ namespace GameFramework.Pro {
     using System.Text;
 
     public abstract class PlayListBase {
-        public sealed class State2 : State {
+        public sealed class State2 : State<State2> {
 
             private readonly PlayListBase m_PlayList;
 

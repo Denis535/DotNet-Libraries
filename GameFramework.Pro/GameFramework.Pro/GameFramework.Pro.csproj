@@ -40,8 +40,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="StateMachine.Pro" Version="6.0.1" />
-        <PackageReference Include="TreeMachine.Pro" Version="6.0.1" />
+        <PackageReference Include="StateMachine.Pro" Version="7.0.0" />
+        <PackageReference Include="TreeMachine.Pro" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -51,6 +51,10 @@
 
     <ItemGroup>
         <Clean Include="$(PackageOutputPath)\*.nupkg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="bin\" />
     </ItemGroup>
 
     <Target Name="IncludeBuilds">

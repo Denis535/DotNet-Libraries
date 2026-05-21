@@ -7,7 +7,7 @@ namespace GameFramework.Pro {
     using System.TreeMachine.Pro;
 
     public abstract class WidgetBase {
-        public sealed class Node2 : Node {
+        public sealed class Node2 : Node<Node2> {
 
             private readonly WidgetBase m_Widget;
 
@@ -28,28 +28,28 @@ namespace GameFramework.Pro {
 
             protected override void OnActivate(object? argument) {
                 // top-down
-                foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
+                foreach (var ancestor in this.Ancestors.ToList().AsEnumerable().Reverse()) {
                     ancestor.Widget.OnBeforeDescendantActivate(this, argument);
                 }
                 this.Widget.OnActivate(argument);
                 // down-top
-                foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList()) {
+                foreach (var ancestor in this.Ancestors.ToList()) {
                     ancestor.Widget.OnAfterDescendantActivate(this, argument);
                 }
             }
             protected override void OnDeactivate(object? argument) {
                 // top-down
-                foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList().AsEnumerable().Reverse()) {
+                foreach (var ancestor in this.Ancestors.ToList().AsEnumerable().Reverse()) {
                     ancestor.Widget.OnBeforeDescendantDeactivate(this, argument);
                 }
                 this.Widget.OnDeactivate(argument);
                 // down-top
-                foreach (var ancestor in this.Ancestors.Cast<Node2>().ToList()) {
+                foreach (var ancestor in this.Ancestors.ToList()) {
                     ancestor.Widget.OnAfterDescendantDeactivate(this, argument);
                 }
             }
 
-            protected override void Sort(List<INode> children) {
+            protected override void Sort(List<Node2> children) {
                 this.Widget.Sort(children);
             }
 
@@ -69,16 +69,16 @@ namespace GameFramework.Pro {
         protected internal abstract void OnActivate(object? argument);
         protected internal abstract void OnDeactivate(object? argument);
 
-        protected internal virtual void OnBeforeDescendantActivate(INode descendant, object? argument) {
+        protected internal virtual void OnBeforeDescendantActivate(Node2 descendant, object? argument) {
         }
-        protected internal virtual void OnAfterDescendantActivate(INode descendant, object? argument) {
+        protected internal virtual void OnAfterDescendantActivate(Node2 descendant, object? argument) {
         }
-        protected internal virtual void OnBeforeDescendantDeactivate(INode descendant, object? argument) {
+        protected internal virtual void OnBeforeDescendantDeactivate(Node2 descendant, object? argument) {
         }
-        protected internal virtual void OnAfterDescendantDeactivate(INode descendant, object? argument) {
+        protected internal virtual void OnAfterDescendantDeactivate(Node2 descendant, object? argument) {
         }
 
-        protected internal virtual void Sort(List<INode> children) {
+        protected internal virtual void Sort(List<Node2> children) {
         }
 
     }
